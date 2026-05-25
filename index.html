@@ -311,6 +311,59 @@
     #lembar.f4-paper { width: 215mm !important; min-height: 330mm !important; }
     @page { size: A4; margin: 0; }
   }
+/* ===== TOMBOL TOGGLE SIDEBAR (MOBILE FRIENDLY) ===== */
+  .btn-toggle-sidebar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .btn-toggle-sidebar:active { transform: scale(0.9); }
+  .btn-toggle-sidebar svg { width: 22px; height: 22px; transition: transform 0.3s; }
+  
+  /* Animasi transisi sidebar saat disembunyikan */
+  #panel {
+    transition: margin-left 0.3s ease, opacity 0.3s ease;
+  }
+  #panel.sidebar-hidden {
+    margin-left: -320px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Responsif Layar HP */
+  @media (max-width: 768px) {
+    body { overflow: auto; }
+    #panel {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      z-index: 999;
+      box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+    }
+    #preview-area { padding: 10px 5px; height: auto; overflow: visible; }
+    #lembar { 
+      transform: scale(0.45); 
+      transform-origin: top center; 
+      margin-bottom: -160mm; /* Kompensasi ruang akibat scaling di HP */
+    }
+  }
+  
+  /* Jangan tampilkan tombol saat dicetak */
+  @media print {
+    .btn-toggle-sidebar { display: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -658,6 +711,29 @@
     .forEach(id => document.getElementById(id).addEventListener('change', updateAll));
 
   updateAll();
+// =========================================================================
+  // LOGIKA SEMBUNYIKAN / TAMPILKAN SIDEBAR
+  // =========================================================================
+  document.getElementById('toggleSidebarBtn').addEventListener('click', function() {
+    const panel = document.getElementById('panel');
+    const btnSvg = this.querySelector('svg');
+    
+    panel.classList.toggle('sidebar-hidden');
+    
+    // Animasi rotasi ikon tombol saat diklik sebagai pemanis visual
+    if (panel.classList.contains('sidebar-hidden')) {
+      btnSvg.style.transform = 'rotate(90deg)';
+    } else {
+      btnSvg.style.transform = 'rotate(0deg)';
+    }
+  });
 </script>
 </body>
+<button class="btn-toggle-sidebar" id="toggleSidebarBtn" title="Sembunyikan/Tampilkan Panel">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</button>
 </html>
