@@ -1025,130 +1025,123 @@ input[type="number"].input-error {
     </div>
     </div>
     <script>
-      const passwordRahasia = "aabb1122";
-      let akses = sessionStorage.getItem("akses_generator");
+      const passwordRahasia = "aabb1122";  //Password Akses
+let akses = sessionStorage.getItem("akses_generator");
 
-      if (!akses) {
-        let inputUser = prompt("Masukkan Kode Akses :");
-        if (inputUser === passwordRahasia) {
-          sessionStorage.setItem("akses_generator", "true");
-          // Tampilkan popup ucapan selamat datang
-          const popup = document.createElement("div");
-          popup.style.cssText = `
-            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 9999; font-family: 'Poppins', sans-serif;
-            animation: fadeIn 0.3s ease;
-          `;
-          popup.innerHTML = `
-            <style>
-              @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-              @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-            </style>
-            <div style="
-              background: linear-gradient(135deg, #1a2535, #0f1923);
-              border: 1px solid #3b82f6;
-              border-radius: 16px;
-              padding: 36px 32px;
-              max-width: 420px;
-              width: 90%;
-              text-align: center;
-              box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-              animation: slideUp 0.35s ease;
-            ">
-              <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
-              <h2 style="color: #3b82f6; font-size: 20px; font-weight: 700; margin-bottom: 8px;">Selamat Datang!</h2>
-              <p style="color: #e2e8f0; font-size: 14px; line-height: 1.7; margin-bottom: 16px;">
-                Terima kasih telah menggunakan <strong>Generator Lembar Jawaban</strong>.<br>
-                Senang bisa membantu Anda!
-              </p>
-              <div style="
-                background: rgba(59,130,246,0.08);
-                border: 1px dashed #3b82f6;
-                border-radius: 10px;
-                padding: 12px 16px;
-                margin-bottom: 20px;
-              ">
-                <p style="color: #94a3b8; font-size: 12px; line-height: 1.7; margin: 0;">
-                  💡 Ingin akses secara <strong style="color:#e2e8f0;">offline</strong>?<br>
-                  Hubungi Admin SDN 10 Serindang di:<br>
-                  <a href="mailto:zechronaionyx1748@gmail.com" style="color: #60a5fa; font-weight: 600; text-decoration: none;">
-                    zechronaionyx1748@gmail.com
-                  </a>
-                </p>
-              </div>
-              <input id="inputWm" type="text" placeholder="Terima Kasih" style="
-                width: 100%;
-                background: rgba(255,255,255,0.05);
-                border: 1px dashed #3b82f6;
-                border-radius: 8px;
-                padding: 9px 14px;
-                font-size: 13px;
-                color: #e2e8f0;
-                font-family: 'Poppins', sans-serif;
-                outline: none;
-                margin-bottom: 12px;
-                text-align: center;
-                box-sizing: border-box;
-              " />
-              <button id="tutupPopup" style="
-                background: linear-gradient(135deg, #3b82f6, #2563eb);
-                color: white;
-                border: none;
-                border-radius: 8px;
-                padding: 10px 28px;
-                font-size: 13px;
-                font-weight: 600;
-                cursor: pointer;
-                font-family: 'Poppins', sans-serif;
-                letter-spacing: 0.5px;
-              ">Mulai Gunakan ✨</button>
-            </div>
-          `;
-          document.body.appendChild(popup);
-          // Buat watermark dulu (selalu ada)
-          const wm = document.createElement('div');
-          wm.id = 'watermark';
-          wm.textContent = 'SDN 10 SERINDANG';
-          wm.style.cssText = `
-            position:fixed; inset:0; pointer-events:none; z-index:1;
-            display:flex; align-items:center; justify-content:center;
-            opacity:0.06; font-size:80px; font-weight:900; color:#000;
-            transform:rotate(-30deg); user-select:none;
-            font-family:'Poppins',sans-serif; white-space:nowrap;`;
-          document.body.appendChild(wm);
+if (!akses) {
+  let inputUser = prompt("Masukkan Kode Akses :");
+  if (inputUser === passwordRahasia) {
+    sessionStorage.setItem("akses_generator", "true");
 
-          document
-            .getElementById("tutupPopup")
-            .addEventListener("click", () => {
-              const kode = document.getElementById("inputWm").value;
-              if (kode === "aabb1122") {
-                wm.style.display = "none";
-              }
-              popup.style.animation = "fadeIn 0.2s ease reverse";
-              setTimeout(() => popup.remove(), 200);
-            });
-        } else {
-          // Jika salah, kunci halaman dan ganti isi layar menjadi pesan error
-          alert(
-            "Kode akses salah! Anda tidak memiliki otoritas untuk menggunakan tools ini.",
-          );
-          document.body.style.cssText =
-            "margin:0; padding:0; background:#0a0f1a; display:flex; align-items:center; justify-content:center; min-height:100vh; width:100%;";
-          document.body.style.cssText =
-            "margin:0; padding:0; background:#0a0f1a; display:flex; align-items:center; justify-content:center; min-height:100vh; width:100%;";
-          document.body.innerHTML = `
-        <div style="color: #ef4444; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; text-align: center; padding: 20px; max-width: 500px; width: 100%;">
-          <h1 style="font-size: clamp(28px, 8vw, 48px); margin-bottom: 10px;">🔒 AKSES DITOLAK</h1>
-          <p style="color: #64748b; font-size: clamp(13px, 3vw, 16px); max-width: 500px; line-height: 1.6;">
-            Maaf, kode keamanan yang Anda masukkan tidak valid. <br>Silakan hubungi pihak admin sekolah SDN 10 Serindang untuk mendapatkan kode akses.
+    // Buat watermark dulu SEBELUM popup
+    const wm = document.createElement('div');
+    wm.id = 'watermark';
+    wm.textContent = 'SDN 10 SERINDANG';
+    wm.style.cssText = `
+      position:fixed; inset:0; pointer-events:none; z-index:1;
+      display:flex; align-items:center; justify-content:center;
+      opacity:0.06; font-size:80px; font-weight:900; color:#000;
+      transform:rotate(-30deg); user-select:none;
+      font-family:'Poppins',sans-serif; white-space:nowrap;`;
+    document.body.appendChild(wm);
+
+    // Popup selamat datang
+    const popup = document.createElement("div");
+    popup.style.cssText = `
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; font-family: 'Poppins', sans-serif;
+      animation: fadeIn 0.3s ease;
+    `;
+    popup.innerHTML = `
+      <style>
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      </style>
+      <div style="
+        background: linear-gradient(135deg, #1a2535, #0f1923);
+        border: 1px solid #3b82f6; border-radius: 16px;
+        padding: 36px 32px; max-width: 420px; width: 90%;
+        text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        animation: slideUp 0.35s ease;
+      ">
+        <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
+        <h2 style="color: #3b82f6; font-size: 20px; font-weight: 700; margin-bottom: 8px;">Selamat Datang!</h2>
+        <p style="color: #e2e8f0; font-size: 14px; line-height: 1.7; margin-bottom: 16px;">
+          Terima kasih telah menggunakan <strong>Generator Lembar Jawaban</strong>.<br>
+          Senang bisa membantu Anda!
+        </p>
+        <div style="
+          background: rgba(59,130,246,0.08); border: 1px dashed #3b82f6;
+          border-radius: 10px; padding: 12px 16px; margin-bottom: 20px;
+        ">
+          <p style="color: #94a3b8; font-size: 12px; line-height: 1.7; margin: 0;">
+            💡 Ingin akses secara <strong style="color:#e2e8f0;">offline</strong>?<br>
+            Hubungi Admin SDN 10 Serindang di:<br>
+            <a href="mailto:zechronaionyx1748@gmail.com" style="color: #60a5fa; font-weight: 600; text-decoration: none;">
+              zechronaionyx1748@gmail.com
+            </a>
           </p>
-          <button onclick="window.location.reload()" style="margin-top: 25px; padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">Coba Lagi</button>
         </div>
-      `;
-          throw new Error("Akses dihentikan karena password salah."); // Menghentikan sisa eksekusi skrip di bawahnya
-        }
+        <input id="inputWm" type="text" placeholder="Terima Kasih" style="
+          width: 100%; background: rgba(255,255,255,0.05);
+          border: 1px dashed #3b82f6; border-radius: 8px;
+          padding: 9px 14px; font-size: 13px; color: #e2e8f0;
+          font-family: 'Poppins', sans-serif; outline: none;
+          margin-bottom: 12px; text-align: center; box-sizing: border-box;
+        " />
+        <button id="tutupPopup" style="
+          background: linear-gradient(135deg, #3b82f6, #2563eb);
+          color: white; border: none; border-radius: 8px;
+          padding: 10px 28px; font-size: 13px; font-weight: 600;
+          cursor: pointer; font-family: 'Poppins', sans-serif; letter-spacing: 0.5px;
+        ">Mulai Gunakan ✨</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+
+    document.getElementById("tutupPopup").addEventListener("click", () => {
+      const kode = document.getElementById("inputWm").value;
+      // Jika kode benar, sembunyikan WM — tapi TIDAK disimpan ke sessionStorage
+      // sehingga refresh = popup muncul lagi = WM tampil lagi
+      if (kode === "aabb1122") {  // ← Password WM
+        wm.style.display = "none";
       }
+      popup.style.animation = "fadeIn 0.2s ease reverse";
+      setTimeout(() => popup.remove(), 200);
+    });
+
+  } else {
+    alert("Kode akses salah! Anda tidak memiliki otoritas untuk menggunakan tools ini.");
+    document.body.style.cssText = "margin:0; padding:0; background:#0a0f1a; display:flex; align-items:center; justify-content:center; min-height:100vh; width:100%;";
+    document.body.innerHTML = `
+      <div style="color: #ef4444; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; text-align: center; padding: 20px; max-width: 500px; width: 100%;">
+        <h1 style="font-size: clamp(28px, 8vw, 48px); margin-bottom: 10px;">🔒 AKSES DITOLAK</h1>
+        <p style="color: #64748b; font-size: clamp(13px, 3vw, 16px); max-width: 500px; line-height: 1.6;">
+          Maaf, kode keamanan yang Anda masukkan tidak valid.<br>Silakan hubungi pihak admin sekolah SDN 10 Serindang.
+        </p>
+        <button onclick="window.location.reload()" style="margin-top: 25px; padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">Coba Lagi</button>
+      </div>
+    `;
+    throw new Error("Akses dihentikan karena password salah.");
+  }
+} else {
+  // Sudah pernah login di sesi ini tapi refresh → 
+  // hapus sesi agar popup muncul lagi di reload berikutnya
+  sessionStorage.removeItem("akses_generator");
+  
+  // Tampilkan WM langsung tanpa popup
+  const wm = document.createElement('div');
+  wm.id = 'watermark';
+  wm.textContent = 'SDN 10 SERINDANG';
+  wm.style.cssText = `
+    position:fixed; inset:0; pointer-events:none; z-index:1;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0.06; font-size:80px; font-weight:900; color:#000;
+    transform:rotate(-30deg); user-select:none;
+    font-family:'Poppins',sans-serif; white-space:nowrap;`;
+  document.body.appendChild(wm);
+}
       // =========================================================================
       const defaultLogo = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='38' fill='%23f0f0f0' stroke='%23999' stroke-width='2'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23aaa'/%3E%3Cellipse cx='40' cy='62' rx='20' ry='12' fill='%23aaa'/%3E%3C/svg%3E`;
       document.getElementById("kop-logo").src = defaultLogo;
@@ -1336,6 +1329,41 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
         updateAll();
       }
       updateAll();
+      // =========================================================================
+      // BLOKIR REFRESH  ← TAMBAHKAN DI SINI
+      // =========================================================================
+      window.addEventListener('beforeunload', function(e) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'F5') {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+        if (e.ctrlKey && (e.key === 'r' || e.key === 'R')) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      }, true);
+
+      document.body.style.overscrollBehavior = 'none';
+      document.documentElement.style.overscrollBehavior = 'none';
+
+      let touchStartY = 0;
+      document.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+      document.addEventListener('touchmove', function(e) {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop === 0 && e.touches[0].clientY > touchStartY) {
+          e.preventDefault();
+        }
+      }, { passive: false });
       // =========================================================================
       // LOGIKA SEMBUNYIKAN / TAMPILKAN SIDEBAR
       // =========================================================================
