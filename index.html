@@ -290,6 +290,22 @@ input[type="number"].input-error {
         flex-shrink: 0;
       }
 
+      @media (max-width: 768px) {
+        .panel-footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 280px;
+          background: var(--panel-bg);
+          z-index: 1000;
+          padding-bottom: 20px;
+          border-top: 1px solid var(--panel-border);
+        }
+        .panel-body {
+          padding-bottom: 80px;
+        }
+      }
+
       .btn-print {
         width: 100%;
         padding: 11px;
@@ -675,6 +691,10 @@ input[type="number"].input-error {
 
       /* MODIFIKASI RESPONSIF: Khusus Layar Ponsel */
       @media (max-width: 768px) {
+        body {
+          flex-direction: column;
+          overflow: auto;
+        }
         #panel {
           position: fixed;
           left: 0;
@@ -692,21 +712,42 @@ input[type="number"].input-error {
         .panel-footer {
           width: 280px;
         }
-
+        #preview-area {
+          margin-left: 0;
+          width: 100%;
+          height: 100vh;
+          overflow-x: auto;
+          padding: 12px 8px;
+        }
         /* Di HP, sembunyikan penuh keluar layar kiri agar tidak memakan ruang */
         #panel.sidebar-hidden {
           transform: translateX(-280px);
           width: 280px !important;
           min-width: 280px !important;
         }
-
-        /* Buat tombol melayang bebas di pojok kiri atas monitor HP saat panel sembunyi */
+        /* Buat tombol melayang bebas di pojok kiri atas HP saat panel sembunyi */
         #panel.sidebar-hidden .btn-toggle-sidebar {
           position: fixed;
           left: 15px;
+          top: 15px;
           right: auto;
           background: var(--panel-accent);
           color: white;
+          z-index: 1000;
+        }
+        /* Tombol cetak nempel di bawah layar */
+        .panel-footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 280px;
+          background: var(--panel-bg);
+          z-index: 1000;
+          padding-bottom: 20px;
+          border-top: 1px solid var(--panel-border);
+        }
+        .panel-body {
+          padding-bottom: 80px;
         }
       }
     </style>
