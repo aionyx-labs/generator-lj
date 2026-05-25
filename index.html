@@ -595,7 +595,23 @@ input[type="number"].input-error {
   border-bottom: 1px solid #000;
   height: 1.1em;
 }
-
+      #watermark {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.06;
+        font-size: 80px;
+        font-weight: 900;
+        color: #000;
+        transform: rotate(-30deg);
+        user-select: none;
+        font-family: 'Poppins', sans-serif;
+        white-space: nowrap;
+      }
       /* ===== PRINT ===== */
       @media print {
         body {
@@ -1061,6 +1077,20 @@ input[type="number"].input-error {
                   </a>
                 </p>
               </div>
+              <input id="inputWm" type="text" placeholder="Terima Kasih" style="
+                width: 100%;
+                background: rgba(255,255,255,0.05);
+                border: 1px dashed #3b82f6;
+                border-radius: 8px;
+                padding: 9px 14px;
+                font-size: 13px;
+                color: #e2e8f0;
+                font-family: 'Poppins', sans-serif;
+                outline: none;
+                margin-bottom: 12px;
+                text-align: center;
+                box-sizing: border-box;
+              " />
               <button id="tutupPopup" style="
                 background: linear-gradient(135deg, #3b82f6, #2563eb);
                 color: white;
@@ -1076,9 +1106,25 @@ input[type="number"].input-error {
             </div>
           `;
           document.body.appendChild(popup);
+          // Buat watermark dulu (selalu ada)
+          const wm = document.createElement('div');
+          wm.id = 'watermark';
+          wm.textContent = 'SDN 10 SERINDANG';
+          wm.style.cssText = `
+            position:fixed; inset:0; pointer-events:none; z-index:1;
+            display:flex; align-items:center; justify-content:center;
+            opacity:0.06; font-size:80px; font-weight:900; color:#000;
+            transform:rotate(-30deg); user-select:none;
+            font-family:'Poppins',sans-serif; white-space:nowrap;`;
+          document.body.appendChild(wm);
+
           document
             .getElementById("tutupPopup")
             .addEventListener("click", () => {
+              const kode = document.getElementById("inputWm").value;
+              if (kode === "aabb1122") {
+                wm.style.display = "none";
+              }
               popup.style.animation = "fadeIn 0.2s ease reverse";
               setTimeout(() => popup.remove(), 200);
             });
@@ -1315,9 +1361,13 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
       document.addEventListener("contextmenu", function (e) {
         e.preventDefault();
       });
-      // Blokir Ctrl+A (select all)
+      /// Blokir Ctrl+A (select all)
       document.addEventListener("keydown", function (e) {
         if (e.ctrlKey && (e.key === "a" || e.key === "A")) {
+          e.preventDefault();
+        }
+        // Blokir Ctrl+P
+        if (e.ctrlKey && (e.key === "p" || e.key === "P")) {
           e.preventDefault();
         }
       });
@@ -1355,6 +1405,32 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
         },
         true,
       );
+      document.addEventListener('keyup', function(e) {
+  if (e.key === 'PrintScreen') {
+    navigator.clipboard.writeText('').catch(()=>{});
+  }
+});
+      // Deteksi DevTools terbuka
+      setInterval(function() {
+        const threshold = 160;
+        if (window.outerWidth - window.innerWidth > threshold || 
+            window.outerHeight - window.innerHeight > threshold) {
+          sessionStorage.removeItem('akses_generator');
+          document.body.innerHTML = `
+            <div style="color:#ef4444;display:flex;flex-direction:column;
+            align-items:center;justify-content:center;height:100vh;
+            font-family:'Poppins',sans-serif;text-align:center;">
+              <h1 style="font-size:48px;">🔒</h1>
+              <h2>DevTools Terdeteksi!</h2>
+              <p style="color:#64748b;margin-top:8px;">Sesi Anda telah diakhiri.</p>
+              <button onclick="window.location.reload()" 
+              style="margin-top:20px;padding:10px 24px;background:#2563eb;
+              color:white;border:none;border-radius:8px;cursor:pointer;
+              font-size:14px;font-weight:600;">Muat Ulang</button>
+            </div>`;
+        }
+      }, 1000);
+
     </script>
   </body>
 </html>
