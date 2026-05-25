@@ -985,15 +985,17 @@
           );
           document.body.style.cssText =
             "margin:0; padding:0; background:#0a0f1a; display:flex; align-items:center; justify-content:center; min-height:100vh; width:100%;";
+          document.body.style.cssText =
+            "margin:0; padding:0; background:#0a0f1a; display:flex; align-items:center; justify-content:center; min-height:100vh; width:100%;";
           document.body.innerHTML = `
-  <div style="color: #ef4444; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; text-align: center; padding: 20px; max-width: 500px; width: 100%;">
-    <h1 style="font-size: clamp(28px, 8vw, 48px); margin-bottom: 10px;">🔒 AKSES DITOLAK</h1>
-    <p style="color: #64748b; font-size: clamp(13px, 3vw, 16px); line-height: 1.6;">
-      Maaf, kode keamanan yang Anda masukkan tidak valid.<br>Silakan hubungi pihak admin sekolah SDN 10 Serindang untuk mendapatkan kode akses.
-    </p>
-    <button onclick="window.location.reload()" style="margin-top: 25px; padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">Coba Lagi</button>
-  </div>
-`;
+        <div style="color: #ef4444; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; text-align: center; padding: 20px; max-width: 500px; width: 100%;">
+          <h1 style="font-size: clamp(28px, 8vw, 48px); margin-bottom: 10px;">🔒 AKSES DITOLAK</h1>
+          <p style="color: #64748b; font-size: clamp(13px, 3vw, 16px); max-width: 500px; line-height: 1.6;">
+            Maaf, kode keamanan yang Anda masukkan tidak valid. <br>Silakan hubungi pihak admin sekolah SDN 10 Serindang untuk mendapatkan kode akses.
+          </p>
+          <button onclick="window.location.reload()" style="margin-top: 25px; padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">Coba Lagi</button>
+        </div>
+      `;
           throw new Error("Akses dihentikan karena password salah."); // Menghentikan sisa eksekusi skrip di bawahnya
         }
       }
