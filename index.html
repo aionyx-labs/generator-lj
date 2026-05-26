@@ -766,6 +766,16 @@ input[type="number"].input-error {
         }
       }
     </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BC4WQG1GFL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BC4WQG1GFL');
+</script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</script>
   </head>
   <body>
     <div id="panel">
@@ -789,7 +799,7 @@ input[type="number"].input-error {
       </button>
       <div class="panel-header">
         <div class="panel-header-text">
-          <h1>⚙ CONTROL PANEL</h1>
+          <h1>⚙ CONTROL PANEL <span id="online-count" style="font-size:10px; font-family:'Poppins',sans-serif; color:#22c55e; font-weight:600; letter-spacing:1px; text-shadow:0 0 8px #22c55e;">● 0 online</span></h1>
           <p>Generator Lembar Jawaban by Aditya</p>
         </div>
       </div>
@@ -1334,6 +1344,18 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
         updateAll();
       }
       updateAll();
+      // Firebase Online Counter
+const firebaseConfig = { databaseURL: "https://generator-lj-default-rtdb.asia-southeast1.firebasedatabase.app" };
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const onlineRef = db.ref("online");
+const myRef = onlineRef.push(true);
+myRef.onDisconnect().remove();
+onlineRef.on("value", snap => {
+  const count = snap.numChildren();
+  document.getElementById("online-count").textContent = `● ${count} online`;
+});
+
       // =========================================================================
       // BLOKIR REFRESH  ← TAMBAHKAN DI SINI
       // =========================================================================
