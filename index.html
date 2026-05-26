@@ -435,11 +435,10 @@ input[type="number"].input-error {
       }
 
       .identitas-row {
-        display: flex;
-        /* Mengubah baseline menjadi center agar posisi teks, titik dua, dan garis sejajar sempurna */
-        align-items: center;
-        gap: 4px;
-        white-space: nowrap;
+         display: flex;
+         align-items: flex-end;
+         gap: 4px;
+         white-space: nowrap;
       }
 
       .identitas-label {
@@ -856,6 +855,10 @@ input[type="number"].input-error {
             <label>Kelas</label>
             <input type="text" id="kelasInput" value="I (Satu)" />
           </div>
+          <div class="form-group">
+             <label>Mata Pelajaran</label>
+            <input type="text" id="mapelInput" placeholder="Matematika" />
+          </div>
         </div>
 
         <div class="panel-section">
@@ -983,7 +986,7 @@ input[type="number"].input-error {
               >Mata Pelajaran</span
             >
             <span style="margin: 0 2px">:</span>
-            <span class="identitas-titik"></span>
+            <span id="mapel-display" style="min-width:240px; border-bottom:1px dotted #000; font-weight:normal;"></span>
           </div>
           <div class="identitas-row">
             <span class="identitas-label" style="min-width: 80px">Kelas</span>
@@ -1282,9 +1285,10 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
           v("baris2") || "TAHUN PELAJARAN 2025/2026";
         document.getElementById("kop-baris3").textContent =
           v("baris3") || "SDN 10 SERINDANG KEC. TEBAS";
-
         document.getElementById("kelas-display").textContent =
-          v("kelasInput") || "..........";
+          v("kelasInput");
+        document.getElementById("mapel-display").textContent = 
+          v("mapelInput");
         document.getElementById("lembar").className =
           v("ukuranKertas") === "f4" ? "f4-paper" : "a4-paper";
         // ... ke bawahnya biarkan sama persis
@@ -1303,6 +1307,7 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
         "baris2",
         "baris3",
         "kelasInput",
+        "mapelInput",
         "ukuranKertas",
         "jml-pg",
         "opsi-pg",
