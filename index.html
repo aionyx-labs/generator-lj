@@ -722,7 +722,6 @@ input[type="number"].input-error {
       #panel.sidebar-hidden .panel-footer {
         opacity: 0;
         visibility: hidden;
-        pointer-events: none;
         width: 0;
         overflow: hidden;
       }
@@ -770,7 +769,8 @@ input[type="number"].input-error {
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
     display: block;
-    overscroll-behavior: auto;
+    overscroll-behavior: contain;
+    scroll-behavior: auto;
   }
 
   #lembar {
@@ -810,10 +810,11 @@ input[type="number"].input-error {
     flex: 1;
     overflow-y: auto !important;
     overflow-x: hidden;
-    height: calc(100vh - 140px);
+    height: auto;
+    max-height: calc(100vh - 140px);
     padding-bottom: 80px;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior: auto;
+    scroll-behavior: smooth;
   }
 }
 /* Floating toggle button — muncul saat sidebar hidden */
@@ -1467,16 +1468,64 @@ onlineRef.on("value", snap => {
       document.body.style.overscrollBehavior = 'none';
       document.documentElement.style.overscrollBehavior = 'none';
 
+      // Swipe gesture variables
+      let touchStartX = 0;
       let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+      let isTouchInToggleArea = false;
+
       document.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
+        
+        const touchElement = e.target;
+        const floatingToggle = document.getElementById("floating-toggle");
+        const toggleSidebarBtn = document.getElementById("toggleSidebarBtn");
+        
+        // Check apakah touch berada di area tombol hamburger
+        isTouchInToggleArea = 
+          (floatingToggle && floatingToggle.contains(touchElement)) ||
+          (toggleSidebarBtn && toggleSidebarBtn.contains(touchElement)) ||
+          (e.touches[0].clientX < 70 && e.touches[0].clientY < 70);
       }, { passive: true });
+
       document.addEventListener('touchmove', function(e) {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         if (scrollTop === 0 && e.touches[0].clientY > touchStartY) {
           e.preventDefault();
         }
       }, { passive: false });
+
+      document.addEventListener('touchend', function(e) {
+        if (!isTouchInToggleArea) return;
+        
+        touchEndX = e.changedTouches[0].clientX;
+        touchEndY = e.changedTouches[0].clientY;
+        handleSwipe();
+        isTouchInToggleArea = false;
+      }, false);
+
+      function handleSwipe() {
+        const panel = document.getElementById("panel");
+        const isMobile = window.innerWidth <= 768;
+        const isHidden = panel.classList.contains("sidebar-hidden");
+        
+        if (!isMobile) return;
+        
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        
+        // Swipe dari kiri ke kanan untuk buka sidebar
+        if (diffX > 80 && Math.abs(diffY) < 50 && isHidden) {
+          setSidebarState(false);
+        }
+        // Swipe dari kanan ke kiri untuk tutup sidebar
+        else if (diffX < -80 && Math.abs(diffY) < 50 && !isHidden) {
+          setSidebarState(true);
+        }
+      }
+
       // =========================================================================
       // LOGIKA SEMBUNYIKAN / TAMPILKAN SIDEBAR
       // =========================================================================
