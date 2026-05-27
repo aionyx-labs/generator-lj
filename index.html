@@ -341,8 +341,9 @@ input[type="number"].input-error {
       #preview-area {
         flex: 1;
         background: #1a1f2e;
-        height: 100vh; /* Ini perintah baru untuk membatasi tinggi pratinjau setinggi layar monitor */
-        overflow-y: auto; /* Ini perintah agar roda scroll otomatis muncul saat kertas memanjang ke bawah */
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
         display: flex;
         align-items: flex-start;
         justify-content: center;
@@ -427,18 +428,20 @@ input[type="number"].input-error {
       .identitas-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        /* Meningkatkan jarak baris dari 2px menjadi 12px agar lebih renggang */
         gap: 12px 24px;
         margin-top: 10px;
         margin-bottom: 15px;
         font-size: 9pt;
+        overflow: hidden;
       }
 
       .identitas-row {
-         display: flex;
-         align-items: flex-end;
-         gap: 4px;
-         white-space: nowrap;
+        display: flex;
+        align-items: flex-end;
+        gap: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        min-width: 0;
       }
 
       .identitas-label {
@@ -451,9 +454,10 @@ input[type="number"].input-error {
         flex: 1;
         border-bottom: 1px dotted #000;
         min-width: 30px;
-        /* Mengatur ulang tinggi agar tidak memotong jarak antar-baris */
+        max-width: 100%;
         height: 1.4em;
         margin-left: 2px;
+        overflow: hidden;
       }
 
       /* JUDUL BAGIAN — disamakan ukurannya */
@@ -618,6 +622,10 @@ input[type="number"].input-error {
           overflow: visible;
           display: block;
         }
+        #floating-toggle,
+        #floating-print {
+          display: none !important;
+        }
         #panel {
           display: none !important;
         }
@@ -650,11 +658,14 @@ input[type="number"].input-error {
         top: 15px;
         right: 15px;
         z-index: 10;
+        flex-shrink: 0;
         background: var(--panel-surface);
         color: var(--panel-text);
         border: 1px solid var(--panel-border);
         border-radius: 6px;
-        padding: 8px;
+        padding: 0;
+        width: 36px;
+        height: 36px;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -671,7 +682,7 @@ input[type="number"].input-error {
       .btn-toggle-sidebar svg {
         width: 16px;
         height: 16px;
-        transition: transform 0.3s;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       /* Kunci agar teks input tidak berdesakan ke bawah saat lebar panel mengecil */
@@ -684,10 +695,9 @@ input[type="number"].input-error {
         width: 320px;
       }
 
-      /* KONDISI AKTIF: Saat menciut, sisakan ruang 64px untuk kesan minimalis */
       #panel.sidebar-hidden {
-        width: 64px;
-        min-width: 64px;
+        width: 56px;
+        min-width: 56px;
       }
 
       /* Sembunyikan konten internal secara halus */
@@ -697,13 +707,20 @@ input[type="number"].input-error {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
+        width: 0;
+        overflow: hidden;
       }
 
-      /* Posisikan tombol tepat di tengah bilah 64px */
       #panel.sidebar-hidden .btn-toggle-sidebar {
-        right: 13px;
+        position: relative;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        right: unset;
+        background: var(--panel-surface);
+        color: var(--panel-text);
+        border-color: var(--panel-border);
       }
-
       /* MODIFIKASI RESPONSIF: Khusus Layar Ponsel */
       @media (max-width: 768px) {
   body {
@@ -731,9 +748,11 @@ input[type="number"].input-error {
     margin-left: 0;
     width: 100vw;
     height: 100vh;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: auto;
     padding: 12px 8px;
     box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
   }
   #panel.sidebar-hidden {
     transform: translateX(-280px);
@@ -768,7 +787,9 @@ input[type="number"].input-error {
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 8px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
   cursor: pointer;
   align-items: center;
   justify-content: center;
@@ -783,7 +804,7 @@ input[type="number"].input-error {
 #floating-print {
   display: none;
   position: fixed;
-  bottom: 20px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1001;
@@ -791,15 +812,17 @@ input[type="number"].input-error {
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 11px 24px;
+  padding: 11px 28px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+  flex-direction: row;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 #floating-print svg {
   width: 15px;
@@ -959,6 +982,13 @@ input[type="number"].input-error {
                   oninput="validateMax(this,15)"
                 />
               </div>
+              <div class="form-group">
+                <label>Penomoran</label>
+                <select id="nomor-isian">
+                  <option value="lanjut">Lanjut dari PG</option>
+                  <option value="mulai1">Mulai dari 1</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -982,6 +1012,13 @@ input[type="number"].input-error {
                   max="10"
                   oninput="validateMax(this,10)"
                 />
+              </div>
+              <div class="form-group">
+                <label>Penomoran</label>
+                <select id="nomor-essay">
+                  <option value="lanjut">Lanjut dari PG+Isian</option>
+                  <option value="mulai1">Mulai dari 1</option>
+                </select>
               </div>
             </div>
           </div>
@@ -1281,7 +1318,8 @@ if (!akses) {
           if (colIdx >= numCols) break;
           const item = document.createElement("div");
           item.className = "isian-item";
-          const nomorIsian = chk('aktif-pg') ? iv('jml-pg') + i : i;
+          const pilihanNomorIsian = document.getElementById('nomor-isian')?.value || 'lanjut';
+          const nomorIsian = (pilihanNomorIsian === 'lanjut' && chk('aktif-pg')) ? iv('jml-pg') + i : i;
 item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="isian-garis"></span>`;
           cols[colIdx].appendChild(item);
         }
@@ -1310,7 +1348,7 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
           item.className = "essay-item";
           item.innerHTML = `
   <div class="essay-nomor-row" style="display:flex; align-items:center; gap:6px;">
-    <span class="essay-nomor" style="flex-shrink:0; font-weight:600;">${(chk('aktif-pg') ? iv('jml-pg') : 0) + (chk('aktif-isian') ? iv('jml-isian') : 0) + i}.</span>
+    <span class="essay-nomor" style="flex-shrink:0; font-weight:600;">${(() => { const p = document.getElementById('nomor-essay')?.value || 'lanjut'; return p === 'lanjut' ? (chk('aktif-pg') ? iv('jml-pg') : 0) + (chk('aktif-isian') ? iv('jml-isian') : 0) + i : i; })()}.</span>
     <div class="essay-line" style="flex:1; border-bottom:1.5px solid #000; height:1.1em;"></div>
   </div>
   <div class="essay-lines" style="padding-left:25px;">
@@ -1373,6 +1411,10 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
       ["aktif-pg", "aktif-isian", "aktif-essay"].forEach((id) =>
         document.getElementById(id).addEventListener("change", updateAll),
       );
+      ["nomor-isian", "nomor-essay"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("change", updateAll);
+      });
       function validateMax(el, max) {
         if (parseInt(el.value) > max) {
           el.value = max;
@@ -1434,31 +1476,35 @@ onlineRef.on("value", snap => {
       // =========================================================================
       // LOGIKA SEMBUNYIKAN / TAMPILKAN SIDEBAR
       // =========================================================================
-      const panel = document.getElementById("panel");
-const floatingToggle = document.getElementById("floating-toggle");
-const floatingPrint = document.getElementById("floating-print");
+      function setSidebarState(hidden) {
+  const panel = document.getElementById("panel");
+  const floatingToggle = document.getElementById("floating-toggle");
+  const floatingPrint = document.getElementById("floating-print");
 
-function setSidebarState(hidden) {
   panel.classList.toggle("sidebar-hidden", hidden);
   const btnSvg = document.querySelector("#toggleSidebarBtn svg");
   if (btnSvg) btnSvg.style.transform = hidden ? "rotate(90deg)" : "rotate(0deg)";
-
-  if (hidden) {
-    floatingToggle.style.display = "flex";
-    floatingPrint.style.display = "flex";
-  } else {
-    floatingToggle.style.display = "none";
-    floatingPrint.style.display = "none";
+  const isMobile = window.innerWidth <= 768;
+  if (floatingToggle) {
+    floatingToggle.style.display = (hidden && isMobile) ? "flex" : "none";
+    floatingToggle.onclick = function() { setSidebarState(false); };
   }
+  if (floatingPrint) floatingPrint.style.display = hidden ? "inline-flex" : "none";
 }
 
 document.getElementById("toggleSidebarBtn").addEventListener("click", function () {
+  const panel = document.getElementById("panel");
   const isHidden = !panel.classList.contains("sidebar-hidden");
   setSidebarState(isHidden);
 });
 
-floatingToggle.addEventListener("click", function () {
-  setSidebarState(false);
+document.addEventListener("DOMContentLoaded", function () {
+  const floatingToggle = document.getElementById("floating-toggle");
+  if (floatingToggle) {
+    floatingToggle.addEventListener("click", function () {
+      setSidebarState(false);
+    });
+  }
 });
       // =========================================================================
       // BLOKIR INSPECT ELEMENT
