@@ -706,65 +706,105 @@ input[type="number"].input-error {
 
       /* MODIFIKASI RESPONSIF: Khusus Layar Ponsel */
       @media (max-width: 768px) {
-        body {
-          flex-direction: column;
-          overflow: auto;
-        }
-        #panel {
-          position: fixed;
-          left: 0;
-          top: 0;
-          bottom: 0;
-          z-index: 999;
-          box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
-          width: 280px !important;
-          min-width: 280px !important;
-          transform: translateX(0);
-          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .panel-header,
-        .panel-body,
-        .panel-footer {
-          width: 280px;
-        }
-        #preview-area {
-          margin-left: 0;
-          width: 100%;
-          height: 100vh;
-          overflow-x: auto;
-          padding: 12px 8px;
-        }
-        /* Di HP, sembunyikan penuh keluar layar kiri agar tidak memakan ruang */
-        #panel.sidebar-hidden {
-          transform: translateX(-280px);
-          width: 280px !important;
-          min-width: 280px !important;
-        }
-        /* Buat tombol melayang bebas di pojok kiri atas HP saat panel sembunyi */
-        #panel.sidebar-hidden .btn-toggle-sidebar {
-          position: fixed;
-          left: 15px;
-          top: 15px;
-          right: auto;
-          background: var(--panel-accent);
-          color: white;
-          z-index: 1000;
-        }
-        /* Tombol cetak nempel di bawah layar */
-        .panel-footer {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          width: 280px;
-          background: var(--panel-bg);
-          z-index: 1000;
-          padding-bottom: 20px;
-          border-top: 1px solid var(--panel-border);
-        }
-        .panel-body {
-          padding-bottom: 80px;
-        }
-      }
+  body {
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+    box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+    width: 280px !important;
+    min-width: 280px !important;
+    transform: translateX(0);
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .panel-header,
+  .panel-body,
+  .panel-footer {
+    width: 280px;
+  }
+  #preview-area {
+    margin-left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    padding: 12px 8px;
+    box-sizing: border-box;
+  }
+  #panel.sidebar-hidden {
+    transform: translateX(-280px);
+    width: 280px !important;
+    min-width: 280px !important;
+  }
+  #panel.sidebar-hidden .btn-toggle-sidebar {
+    display: none;
+  }
+  .panel-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 280px;
+    background: var(--panel-bg);
+    z-index: 1000;
+    padding-bottom: 20px;
+    border-top: 1px solid var(--panel-border);
+  }
+  .panel-body {
+    padding-bottom: 80px;
+  }
+}
+/* Floating toggle button — muncul saat sidebar hidden */
+#floating-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  background: var(--panel-accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+#floating-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Floating print button — muncul saat sidebar hidden */
+#floating-print {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+  align-items: center;
+  gap: 8px;
+}
+#floating-print svg {
+  width: 15px;
+  height: 15px;
+}
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BC4WQG1GFL"></script>
 <script>
@@ -1394,20 +1434,32 @@ onlineRef.on("value", snap => {
       // =========================================================================
       // LOGIKA SEMBUNYIKAN / TAMPILKAN SIDEBAR
       // =========================================================================
-      document
-        .getElementById("toggleSidebarBtn")
-        .addEventListener("click", function () {
-          const panel = document.getElementById("panel");
-          const btnSvg = this.querySelector("svg");
+      const panel = document.getElementById("panel");
+const floatingToggle = document.getElementById("floating-toggle");
+const floatingPrint = document.getElementById("floating-print");
 
-          panel.classList.toggle("sidebar-hidden");
+function setSidebarState(hidden) {
+  panel.classList.toggle("sidebar-hidden", hidden);
+  const btnSvg = document.querySelector("#toggleSidebarBtn svg");
+  if (btnSvg) btnSvg.style.transform = hidden ? "rotate(90deg)" : "rotate(0deg)";
 
-          if (panel.classList.contains("sidebar-hidden")) {
-            btnSvg.style.transform = "rotate(90deg)";
-          } else {
-            btnSvg.style.transform = "rotate(0deg)";
-          }
-        });
+  if (hidden) {
+    floatingToggle.style.display = "flex";
+    floatingPrint.style.display = "flex";
+  } else {
+    floatingToggle.style.display = "none";
+    floatingPrint.style.display = "none";
+  }
+}
+
+document.getElementById("toggleSidebarBtn").addEventListener("click", function () {
+  const isHidden = !panel.classList.contains("sidebar-hidden");
+  setSidebarState(isHidden);
+});
+
+floatingToggle.addEventListener("click", function () {
+  setSidebarState(false);
+});
       // =========================================================================
       // BLOKIR INSPECT ELEMENT
       // =========================================================================
@@ -1487,5 +1539,23 @@ onlineRef.on("value", snap => {
       }, 1000);
 
     </script>
+    <!-- Floating toggle button -->
+<button id="floating-toggle" title="Tampilkan Panel">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</button>
+
+<!-- Floating print button -->
+<button id="floating-print" onclick="window.print()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <polyline points="6 9 6 2 18 2 18 9"/>
+    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+    <rect x="6" y="14" width="12" height="8"/>
+  </svg>
+  Cetak Lembar Jawaban
+</button>
   </body>
 </html>
