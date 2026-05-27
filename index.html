@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generator LJA</title>
+    <title>Generator LJA by Zech</title>
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#3b82f6" />
@@ -105,6 +105,8 @@ input[type="number"].input-error {
         padding: 16px;
         scrollbar-width: thin;
         scrollbar-color: var(--panel-border) transparent;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
       }
       .panel-body::-webkit-scrollbar {
         width: 4px;
@@ -762,12 +764,14 @@ input[type="number"].input-error {
     margin-left: 0;
     width: 100vw;
     height: 100vh;
-    overflow-x: auto;
-    overflow-y: auto;
+    overflow-x: scroll;
+    overflow-y: scroll;
     padding: 12px 8px;
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
     display: block;
+    touch-action: pan-x pan-y;
+    overscroll-behavior: contain;
   }
 
   #lembar {
@@ -898,7 +902,7 @@ input[type="number"].input-error {
       <div class="panel-header">
         <div class="panel-header-text">
           <h1>⚙ TOOL ADJUSTMENT <span id="online-count" style="font-size:10px; font-family:'Poppins',sans-serif; color:#22c55e; font-weight:600; letter-spacing:1px; text-shadow:0 0 8px #22c55e;">● 0 online</span></h1>
-          <p>Generator Lembar Jawaban by SDN10Sr <span style="opacity:0.5; font-size:10px;">v2.19</span></p>
+          <p>Generator Lembar Jawaban by Zech v1.21<span style="opacity:0.5; font-size:10px;">v2.19</span></p>
         </div>
       </div>
 
@@ -945,7 +949,7 @@ input[type="number"].input-error {
             <input
               type="text"
               id="baris3"
-              placeholder="SDN 10 SERINDANG KEC. TEBAS"
+              placeholder="NAMA SEKOLAH / MADRASAH"
             />
           </div>
         </div>
@@ -1090,7 +1094,7 @@ input[type="number"].input-error {
             </div>
             <div class="baris2" id="kop-baris2">SEMESTER GENAP TAHUN PELAJARAN 2025/2026</div>
             <div class="baris3" id="kop-baris3">
-              SDN 10 SERINDANG KEC. TEBAS
+              NAMA SEKOLAH / MADRASAH
             </div>
           </div>
         </div>
@@ -1150,123 +1154,88 @@ input[type="number"].input-error {
     </div>
     </div>
     <script>
-      const passwordRahasia = "aabb1122";  //Password Akses
-let akses = sessionStorage.getItem("akses_generator");
+      // Cek apakah sesi ini sudah unlock WM sebelumnya
+const wmUnlocked = sessionStorage.getItem("wm_unlocked");
 
-if (!akses) {
-  let inputUser = prompt("Masukkan Kode Akses :");
-  if (inputUser === passwordRahasia) {
-    sessionStorage.setItem("akses_generator", "true");
+const wm = document.createElement('div');
+wm.id = 'watermark';
+wm.textContent = 'LJ BY ZECH'; // Ubah teks watermark sesuai keinginan
+wm.style.cssText = `
+  position:fixed; inset:0; pointer-events:none; z-index:1;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0.06; font-size:80px; font-weight:900; color:#000;
+  transform:rotate(-30deg); user-select:none;
+  font-family:'Poppins',sans-serif; white-space:nowrap;`;
+document.body.appendChild(wm);
 
-    // Buat watermark dulu SEBELUM popup
-    const wm = document.createElement('div');
-    wm.id = 'watermark';
-    wm.textContent = 'SDN 10 SERINDANG';
-    wm.style.cssText = `
-      position:fixed; inset:0; pointer-events:none; z-index:1;
-      display:flex; align-items:center; justify-content:center;
-      opacity:0.06; font-size:80px; font-weight:900; color:#000;
-      transform:rotate(-30deg); user-select:none;
-      font-family:'Poppins',sans-serif; white-space:nowrap;`;
-    document.body.appendChild(wm);
+if (wmUnlocked === "true") {
+  wm.style.display = "none";
+}
 
-    // Popup selamat datang
-    const popup = document.createElement("div");
-    popup.style.cssText = `
-      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 9999; font-family: 'Poppins', sans-serif;
-      animation: fadeIn 0.3s ease;
-    `;
-    popup.innerHTML = `
-      <style>
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-      </style>
-      <div style="
-        background: linear-gradient(135deg, #1a2535, #0f1923);
-        border: 1px solid #3b82f6; border-radius: 16px;
-        padding: 36px 32px; max-width: 420px; width: 90%;
-        text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-        animation: slideUp 0.35s ease;
-      ">
-        <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
-        <h2 style="color: #3b82f6; font-size: 20px; font-weight: 700; margin-bottom: 8px;">Selamat Datang!</h2>
-        <p style="color: #e2e8f0; font-size: 14px; line-height: 1.7; margin-bottom: 16px;">
-          Terima kasih telah menggunakan <strong>Generator Lembar Jawaban</strong>.<br>
-          Senang bisa membantu Anda!
-        </p>
-        <div style="
-          background: rgba(59,130,246,0.08); border: 1px dashed #3b82f6;
-          border-radius: 10px; padding: 12px 16px; margin-bottom: 20px;
-        ">
-          <p style="color: #94a3b8; font-size: 12px; line-height: 1.7; margin: 0;">
-            💡 Ingin akses secara <strong style="color:#e2e8f0;">offline</strong>?<br>
-            Hubungi Admin SDN 10 Serindang di:<br>
+const popup = document.createElement("div");
+popup.style.cssText = `
+  position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; font-family: 'Poppins', sans-serif;
+  animation: fadeIn 0.3s ease;
+`;
+popup.innerHTML = `
+  <style>
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  </style>
+  <div style="
+    background: linear-gradient(135deg, #1a2535, #0f1923);
+    border: 1px solid #3b82f6; border-radius: 16px;
+    padding: 36px 32px; max-width: 420px; width: 90%;
+    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    animation: slideUp 0.35s ease;
+  ">
+    <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
+    <h2 style="color: #3b82f6; font-size: 20px; font-weight: 700; margin-bottom: 8px;">Selamat Datang!</h2>
+    <p style="color: #e2e8f0; font-size: 14px; line-height: 1.7; margin-bottom: 20px;">
+      Terima kasih telah menggunakan<br>
+      <strong>Generator LJ by Zech</strong>.<br>
+      Aplikasi ini dapat di akses dengan gratis, senang bisa membantu Anda!
+    </p>
+    <div style="
+      border: 2px dashed #3b82f6; border-radius: 12px; padding: 16px;
+      margin-bottom: 20px; background: rgba(59, 130, 246, 0.05);
+    ">
+      <p style="color: #94a3b8; font-size: 12px; line-height: 1.7; margin: 0;">
+            💡 Ingin akses <strong style="color:#e2e8f0;">Tanpa Watermark</strong>?<br>
+            Hubungi kami di email:<br>
             <a href="mailto:zechronaionyx1748@gmail.com" style="color: #60a5fa; font-weight: 600; text-decoration: none;">
               zechronaionyx1748@gmail.com
             </a>
           </p>
         </div>
-        <input id="inputWm" type="text" placeholder="Terima Kasih" style="
-          width: 100%; background: rgba(255,255,255,0.05);
-          border: 1px dashed #3b82f6; border-radius: 8px;
-          padding: 9px 14px; font-size: 13px; color: #e2e8f0;
-          font-family: 'Poppins', sans-serif; outline: none;
-          margin-bottom: 12px; text-align: center; box-sizing: border-box;
-        " />
-        <button id="tutupPopup" style="
-          background: linear-gradient(135deg, #3b82f6, #2563eb);
-          color: white; border: none; border-radius: 8px;
-          padding: 10px 28px; font-size: 13px; font-weight: 600;
-          cursor: pointer; font-family: 'Poppins', sans-serif; letter-spacing: 0.5px;
-        ">Mulai Gunakan ✨</button>
-      </div>
-    `;
-    document.body.appendChild(popup);
+    <input id="inputWm" type="text" placeholder="Terima Kasih" style="
+      width: 100%; background: rgba(255,255,255,0.05);
+      border: 1px dashed #3b82f6; border-radius: 8px;
+      padding: 9px 14px; font-size: 13px; color: #e2e8f0;
+      font-family: 'Poppins', sans-serif; outline: none;
+      margin-bottom: 12px; text-align: center; box-sizing: border-box;
+    " />
+    <button id="tutupPopup" style="
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white; border: none; border-radius: 8px;
+      padding: 10px 28px; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: 'Poppins', sans-serif; letter-spacing: 0.5px;
+    ">Mulai Gunakan ✨</button>
+  </div>
+`;
+document.body.appendChild(popup);
 
-    document.getElementById("tutupPopup").addEventListener("click", () => {
-      const kode = document.getElementById("inputWm").value;
-      // Jika kode benar, sembunyikan WM — tapi TIDAK disimpan ke sessionStorage
-      // sehingga refresh = popup muncul lagi = WM tampil lagi
-      if (kode === "aabb1122") {  // ← Password WM
-        wm.style.display = "none";
-      }
-      popup.style.animation = "fadeIn 0.2s ease reverse";
-      setTimeout(() => popup.remove(), 200);
-    });
-
-  } else {
-    alert("Kode akses salah! Anda tidak memiliki otoritas untuk menggunakan tools ini.");
-    document.body.style.cssText = "margin:0; padding:0; background:#0a0f1a; display:flex; align-items:center; justify-content:center; min-height:100vh; width:100%;";
-    document.body.innerHTML = `
-      <div style="color: #ef4444; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; text-align: center; padding: 20px; max-width: 500px; width: 100%;">
-        <h1 style="font-size: clamp(28px, 8vw, 48px); margin-bottom: 10px;">🔒 AKSES DITOLAK</h1>
-        <p style="color: #64748b; font-size: clamp(13px, 3vw, 16px); max-width: 500px; line-height: 1.6;">
-          Maaf, kode keamanan yang Anda masukkan tidak valid.<br>Silakan hubungi pihak admin sekolah SDN 10 Serindang.
-        </p>
-        <button onclick="window.location.reload()" style="margin-top: 25px; padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">Coba Lagi</button>
-      </div>
-    `;
-    throw new Error("Akses dihentikan karena password salah.");
+document.getElementById("tutupPopup").addEventListener("click", () => {
+  const kode = document.getElementById("inputWm").value;
+  if (kode === "ZECHG30HZ") {  // ← Password WM
+    wm.style.display = "none";
+    sessionStorage.setItem("wm_unlocked", "true");
   }
-} else {
-  // Sudah pernah login di sesi ini tapi refresh → 
-  // hapus sesi agar popup muncul lagi di reload berikutnya
-  sessionStorage.removeItem("akses_generator");
-  
-  // Tampilkan WM langsung tanpa popup
-  const wm = document.createElement('div');
-  wm.id = 'watermark';
-  wm.textContent = 'SDN 10 SERINDANG';
-  wm.style.cssText = `
-    position:fixed; inset:0; pointer-events:none; z-index:1;
-    display:flex; align-items:center; justify-content:center;
-    opacity:0.06; font-size:80px; font-weight:900; color:#000;
-    transform:rotate(-30deg); user-select:none;
-    font-family:'Poppins',sans-serif; white-space:nowrap;`;
-  document.body.appendChild(wm);
-}
+  popup.style.animation = "fadeIn 0.2s ease reverse";
+  setTimeout(() => popup.remove(), 200);
+});
       // =========================================================================
       const defaultLogo = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='38' fill='%23f0f0f0' stroke='%23999' stroke-width='2'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23aaa'/%3E%3Cellipse cx='40' cy='62' rx='20' ry='12' fill='%23aaa'/%3E%3C/svg%3E`;
       document.getElementById("kop-logo").src = defaultLogo;
@@ -1407,7 +1376,7 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
         document.getElementById("kop-baris2").textContent =
           v("baris2") || "SEMESTER GENAP TAHUN PELAJARAN 2025/2026";
         document.getElementById("kop-baris3").textContent =
-          v("baris3") || "SDN 10 SERINDANG KEC. TEBAS";
+          v("baris3") || "NAMA SEKOLAH / MADRASAH";
         document.getElementById("kelas-display").textContent =
           v("kelasInput");
         document.getElementById("mapel-display").textContent = 
@@ -1603,7 +1572,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const threshold = 160;
         if (window.outerWidth - window.innerWidth > threshold || 
             window.outerHeight - window.innerHeight > threshold) {
-          sessionStorage.removeItem('akses_generator');
+          sessionStorage.removeItem('wm_unlocked');
           document.body.innerHTML = `
             <div style="color:#ef4444;display:flex;flex-direction:column;
             align-items:center;justify-content:center;height:100vh;
