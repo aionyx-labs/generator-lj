@@ -3,7 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generator Lembar Jawaban by SDN10Sr</title>
+    <title>Generator LJA</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Generator LJA" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap"
       rel="stylesheet"
@@ -514,13 +521,13 @@ input[type="number"].input-error {
         font-size: 8.5pt;
         padding-left: 0px;
       }
-      /* Kotak PG — Lebih besar dari sebelumnya */
+      /* Kotak PG */
       .pg-kotak {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 27px;
-        height: 27px;
+        width: 26px;
+        height: 26px;
         border: 1.5px solid #000;
         font-size: 9.5pt;
         font-weight: 500;
@@ -678,6 +685,13 @@ input[type="number"].input-error {
       .btn-toggle-sidebar:hover {
         background: var(--panel-accent);
         color: white;
+        border-color: var(--panel-accent);
+      }
+
+      #panel.sidebar-hidden .btn-toggle-sidebar:hover {
+        background: var(--panel-accent);
+        color: white;
+        border-color: var(--panel-accent);
       }
       .btn-toggle-sidebar svg {
         width: 16px;
@@ -753,6 +767,19 @@ input[type="number"].input-error {
     padding: 12px 8px;
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
+    display: block;
+  }
+
+  #lembar {
+    width: 210mm !important;
+    min-width: 210mm !important;
+    transform: none !important;
+    margin: 0 auto;
+  }
+
+  #lembar.f4-paper {
+    width: 215mm !important;
+    min-width: 215mm !important;
   }
   #panel.sidebar-hidden {
     transform: translateX(-280px);
@@ -845,7 +872,6 @@ input[type="number"].input-error {
       <button
         class="btn-toggle-sidebar"
         id="toggleSidebarBtn"
-        title="Sembunyikan/Tampilkan Panel"
       >
         <svg
           viewBox="0 0 24 24"
@@ -862,8 +888,8 @@ input[type="number"].input-error {
       </button>
       <div class="panel-header">
         <div class="panel-header-text">
-          <h1>⚙ CONTROL PANEL <span id="online-count" style="font-size:10px; font-family:'Poppins',sans-serif; color:#22c55e; font-weight:600; letter-spacing:1px; text-shadow:0 0 8px #22c55e;">● 0 online</span></h1>
-          <p>Generator Lembar Jawaban by Aditya</p>
+          <h1>⚙ TOOL ADJUSTMENT <span id="online-count" style="font-size:10px; font-family:'Poppins',sans-serif; color:#22c55e; font-weight:600; letter-spacing:1px; text-shadow:0 0 8px #22c55e;">● 0 online</span></h1>
+          <p>Generator Lembar Jawaban by SDN10Sr <span style="opacity:0.5; font-size:10px;">v1.22</span></p>
         </div>
       </div>
 
@@ -883,7 +909,7 @@ input[type="number"].input-error {
               />
               <div class="logo-upload-text" id="logoUploadText">
                 📁 Klik untuk upload logo<br /><small
-                  style="font-size: 10px; opacity: 0.6"
+                  style="font-size: 12px; opacity: 0.6"
                   >PNG, JPG, SVG</small
                 >
               </div>
@@ -902,7 +928,7 @@ input[type="number"].input-error {
             <input
               type="text"
               id="baris2"
-              placeholder="TAHUN PELAJARAN 2025/2026"
+              placeholder="SEMESTER GENAP TAHUN PELAJARAN 2025/2026"
             />
           </div>
           <div class="form-group">
@@ -1053,7 +1079,7 @@ input[type="number"].input-error {
             <div class="baris1" id="kop-baris1">
               PENILAIAN AKHIR SATUAN PENDIDIKAN
             </div>
-            <div class="baris2" id="kop-baris2">TAHUN PELAJARAN 2025/2026</div>
+            <div class="baris2" id="kop-baris2">SEMESTER GENAP TAHUN PELAJARAN 2025/2026</div>
             <div class="baris3" id="kop-baris3">
               SDN 10 SERINDANG KEC. TEBAS
             </div>
@@ -1370,7 +1396,7 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
         document.getElementById("kop-baris1").textContent =
           v("baris1") || "PENILAIAN AKHIR SATUAN PENDIDIKAN";
         document.getElementById("kop-baris2").textContent =
-          v("baris2") || "TAHUN PELAJARAN 2025/2026";
+          v("baris2") || "SEMESTER GENAP TAHUN PELAJARAN 2025/2026";
         document.getElementById("kop-baris3").textContent =
           v("baris3") || "SDN 10 SERINDANG KEC. TEBAS";
         document.getElementById("kelas-display").textContent =
@@ -1579,14 +1605,14 @@ document.addEventListener("DOMContentLoaded", function () {
               <button onclick="window.location.reload()" 
               style="margin-top:20px;padding:10px 24px;background:#2563eb;
               color:white;border:none;border-radius:8px;cursor:pointer;
-              font-size:14px;font-weight:600;">Muat Ulang</button>
+              font-size:14px;font-weight:600;">🔄 Muat Ulang</button>
             </div>`;
         }
       }, 1000);
 
     </script>
     <!-- Floating toggle button -->
-<button id="floating-toggle" title="Tampilkan Panel">
+<button id="floating-toggle">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <line x1="3" y1="12" x2="21" y2="12"></line>
     <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -1603,5 +1629,10 @@ document.addEventListener("DOMContentLoaded", function () {
   </svg>
   Cetak Lembar Jawaban
 </button>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
   </body>
 </html>
