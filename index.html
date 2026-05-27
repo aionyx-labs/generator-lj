@@ -781,14 +781,17 @@ input[type="number"].input-error {
     width: 215mm !important;
     min-width: 215mm !important;
   }
+
   #panel.sidebar-hidden {
     transform: translateX(-280px);
     width: 280px !important;
     min-width: 280px !important;
   }
+
   #panel.sidebar-hidden .btn-toggle-sidebar {
     display: none;
   }
+
   .panel-footer {
     position: fixed;
     bottom: 0;
@@ -799,8 +802,14 @@ input[type="number"].input-error {
     padding-bottom: 20px;
     border-top: 1px solid var(--panel-border);
   }
+
   .panel-body {
+    flex: 1;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    height: calc(100vh - 140px);
     padding-bottom: 80px;
+    -webkit-overflow-scrolling: touch;
   }
 }
 /* Floating toggle button — muncul saat sidebar hidden */
@@ -889,7 +898,7 @@ input[type="number"].input-error {
       <div class="panel-header">
         <div class="panel-header-text">
           <h1>⚙ TOOL ADJUSTMENT <span id="online-count" style="font-size:10px; font-family:'Poppins',sans-serif; color:#22c55e; font-weight:600; letter-spacing:1px; text-shadow:0 0 8px #22c55e;">● 0 online</span></h1>
-          <p>Generator Lembar Jawaban by SDN10Sr <span style="opacity:0.5; font-size:10px;">v1.22</span></p>
+          <p>Generator Lembar Jawaban by SDN10Sr <span style="opacity:0.5; font-size:10px;">v2.19</span></p>
         </div>
       </div>
 
