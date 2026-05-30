@@ -85,12 +85,32 @@ input[type="number"].input-error {
       }
 
       .panel-header h1 {
-        font-size: 13px;
+        font-size: 16px;
         font-weight: 700;
         color: var(--panel-accent);
         letter-spacing: 1.5px;
         text-transform: uppercase;
         margin-bottom: 4px;
+        text-shadow: 0 0 8px rgba(59, 130, 246, 0.6), 0 0 20px rgba(59, 130, 246, 0.3);
+        transition: text-shadow 0.3s ease, color 0.3s ease;
+        cursor: default;
+      }
+      .panel-header h1:hover {
+        color: #93c5fd;
+        text-shadow: 0 0 12px rgba(147, 197, 253, 0.9), 0 0 30px rgba(59, 130, 246, 0.6), 0 0 50px rgba(59, 130, 246, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        #online-count {
+          display: block !important;
+          margin-top: 4px;
+          font-size: 10px !important;
+          letter-spacing: 1px;
+        }
+        .panel-header h1 {
+          font-size: 11px !important;
+          white-space: nowrap;
+        }
       }
 
       .panel-header p {
@@ -471,18 +491,68 @@ input[type="number"].input-error {
 
       /* JUDUL BAGIAN — disamakan ukurannya */
       .bagian-title {
-        font-weight: 700;
-        font-size: 11pt;
+        font-weight: 600;
+        font-size: 9pt;
         text-transform: uppercase;
-        border-bottom: 1.5px solid #333;
+        border-bottom: 1px solid #555;
         padding-bottom: 3px;
         margin-bottom: 6px;
       }
 
       /* Jarak antar bagian agar tidak sumpek */
       .bagian-wrapper {
-        margin-top: 15px;
-        margin-bottom: 10px;
+        margin-top: 9px;
+        margin-bottom: 4px;
+      }
+
+      /* ===== KOTAK NILAI & PARAF ===== */
+      .kotak-bawah-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        padding-top: 12px;
+      }
+      .kotak-nilai-item {
+        border: 1.5px solid #000;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+      }
+      .kotak-nilai-col {
+        display: flex;
+        flex-direction: column;
+        width: 120px;
+        border-right: 1.5px solid #000;
+      }
+      .kotak-nilai-col:last-child {
+        border-right: none;
+      }
+      .kotak-nilai-label {
+        font-size: 8pt;
+        font-weight: 600;
+        padding: 3px 6px;
+        border-bottom: 1.5px solid #000;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .kotak-nilai-isi {
+        height: 50px;
+      }
+
+      /* ===== MODE CETAK HITAM PUTIH ===== */
+      @media print {
+        body.bw-mode #lembar * {
+          color: #000 !important;
+          background: white !important;
+          border-color: #000 !important;
+          text-shadow: none !important;
+          box-shadow: none !important;
+        }
+        body.bw-mode .kop-logo,
+        body.bw-mode #watermark {
+          filter: none !important;
+        }
       }
 
       /* ===== PILIHAN GANDA ===== */
@@ -632,7 +702,9 @@ input[type="number"].input-error {
           display: block;
         }
         #floating-toggle,
-        #floating-print {
+        #floating-print,
+        #settings-btn,
+        #settings-dropdown {
           display: none !important;
         }
         #panel {
@@ -657,7 +729,7 @@ input[type="number"].input-error {
           min-height: 330mm !important;
         }
         @page {
-          size: A4;
+          size: var(--print-size, A4);
           margin: 0;
         }
       }
@@ -741,6 +813,8 @@ input[type="number"].input-error {
   body {
     flex-direction: column;
     overflow: hidden;
+    height: 100vh;
+    max-height: 100vh;
   }
   #panel {
     position: fixed;
@@ -766,11 +840,15 @@ input[type="number"].input-error {
     overflow-x: auto;
     overflow-y: auto;
     padding: 12px 8px;
+    padding-bottom: 80px;
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
     display: block;
     overscroll-behavior: contain;
     scroll-behavior: auto;
+    touch-action: pan-x pan-y;
+    position: relative;
+    z-index: 1;
   }
 
   #lembar {
@@ -808,14 +886,144 @@ input[type="number"].input-error {
 
   .panel-body {
     flex: 1;
-    overflow-y: auto !important;
+    overflow-y: scroll !important;
     overflow-x: hidden;
     height: auto;
     max-height: calc(100vh - 140px);
     padding-bottom: 80px;
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
   }
+}
+/* ===== TOMBOL GERIGI ===== */
+#settings-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1002;
+  background: var(--panel-surface);
+  color: var(--panel-text);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+#settings-btn:hover {
+  background: var(--panel-accent);
+  color: white;
+  border-color: var(--panel-accent);
+}
+#settings-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#settings-btn.open svg {
+  transform: rotate(90deg);
+}
+
+#settings-dropdown {
+  position: fixed;
+  top: 58px;
+  right: 15px;
+  z-index: 1002;
+  background: var(--panel-surface);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 6px;
+  min-width: 180px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  transform-origin: top right;
+  animation: dropdownIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes dropdownIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+#settings-dropdown.open {
+  display: flex;
+}
+.settings-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--panel-text);
+  position: relative;
+  transition: background 0.15s;
+  user-select: none;
+}
+.settings-menu-item:hover {
+  background: rgba(59,130,246,0.12);
+}
+.settings-menu-item > span:first-child {
+  flex: 1;
+}
+.settings-arrow {
+  font-size: 14px;
+  color: var(--panel-muted);
+  transition: transform 0.2s;
+}
+.settings-menu-item.open .settings-arrow {
+  transform: rotate(90deg);
+}
+.settings-submenu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--panel-surface);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  flex-direction: column;
+  gap: 2px;
+  animation: dropdownIn 0.2s cubic-bezier(0.4,0,0.2,1);
+  z-index: 1003;
+}
+.settings-menu-item.open .settings-submenu {
+  display: flex;
+}
+.lang-option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 7px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--panel-text);
+  border: none;
+  background: transparent;
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.lang-option:hover {
+  background: rgba(59,130,246,0.12);
+}
+.lang-option.active {
+  background: rgba(59,130,246,0.2);
+  color: #60a5fa;
 }
 /* Floating toggle button — muncul saat sidebar hidden */
 #floating-toggle {
@@ -843,7 +1051,7 @@ input[type="number"].input-error {
 
 /* Floating print button — muncul saat sidebar hidden */
 #floating-print {
-  display: none;
+  display: inline-flex;
   position: fixed;
   bottom: 24px;
   left: 50%;
@@ -902,8 +1110,9 @@ input[type="number"].input-error {
       </button>
       <div class="panel-header">
         <div class="panel-header-text">
-          <h1>⚙ TOOL ADJUSTMENT <span id="online-count" style="font-size:10px; font-family:'Poppins',sans-serif; color:#22c55e; font-weight:600; letter-spacing:1px; text-shadow:0 0 8px #22c55e;">● 0 online</span></h1>
-          <p>Generator Lembar Jawaban by Zech<span style="opacity:0.5; font-size:10px;">v2.21</span></p>
+          <h1>⚙ TOOL ADJUSTMENT</h1>
+          <p>Generator LJ by Zech<span style="opacity:0.5; font-size:10px;"> v1.17</span></p>
+          <p id="online-count" style="font-size:10px; font-family:'Poppins',sans-serif; color:#22c55e; font-weight:600; letter-spacing:1px; text-shadow:0 0 8px #22c55e;">● 0 online</p>
         </div>
       </div>
 
@@ -971,6 +1180,17 @@ input[type="number"].input-error {
           <div class="form-group">
              <label>Mata Pelajaran</label>
             <input type="text" id="mapelInput" placeholder="Matematika" />
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <div class="panel-section-title">Opsi Tambahan</div>
+          <div class="section-card active" id="card-kotak-bawah">
+            <div class="section-card-header">
+              <span>Kotak Nilai & Paraf</span>
+              <label class="toggle"><input type="checkbox" id="aktif-kotak-bawah" /><span class="toggle-slider"></span></label>
+            </div>
+            <div style="font-size:10px; color:var(--panel-muted); margin-top:-4px;">* Opsi hanya tersedia untuk kertas F4</div>
           </div>
         </div>
 
@@ -1064,24 +1284,6 @@ input[type="number"].input-error {
           </div>
         </div>
       </div>
-
-      <div class="panel-footer">
-        <button class="btn-print" onclick="window.print()">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-          >
-            <polyline points="6 9 6 2 18 2 18 9" />
-            <path
-              d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
-            />
-            <rect x="6" y="14" width="12" height="8" />
-          </svg>
-          Cetak Lembar Jawaban
-        </button>
-      </div>
     </div>
 
     <!-- ===== PREVIEW ===== -->
@@ -1151,6 +1353,19 @@ input[type="number"].input-error {
           <div class="bagian-title">III. Essay</div>
           <div class="essay-columns-wrapper" id="essay-columns-wrapper"></div>
         </div>
+
+        <div id="area-kotak-bawah" class="kotak-bawah-wrapper" style="display:none;">
+          <div class="kotak-nilai-item">
+            <div class="kotak-nilai-col">
+              <div class="kotak-nilai-label">Nilai</div>
+              <div class="kotak-nilai-isi"></div>
+            </div>
+            <div class="kotak-nilai-col">
+              <div class="kotak-nilai-label">Paraf Orang Tua</div>
+              <div class="kotak-nilai-isi"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     </div>
@@ -1206,7 +1421,7 @@ popup.innerHTML = `
       <p style="color: #94a3b8; font-size: 12px; line-height: 1.7; margin: 0;">
             💡 Ingin akses <strong style="color:#e2e8f0;">Tanpa Watermark</strong>?<br>
             Hubungi kami di email:<br>
-            <a href="mailto:zechronaionyx1748@gmail.com" style="color: #60a5fa; font-weight: 600; text-decoration: none;">
+            <a href="mailto:zechronaionyx1748@gmail.com?subject=Request%20%26%20Feedback%20-%20Generator%20LJ%20by%20Zech&body=Hi%20Zech%2C%0A%0A%5BFill%20in%20one%20or%20both%20sections%20below%5D%0A%0A%E2%96%A0%20WATERMARK%20REMOVAL%20REQUEST%0AI%20would%20like%20to%20request%20a%20code%20to%20remove%20the%20watermark%20from%20Generator%20LJ.%0AName%20%2F%20Institution%20%3A%20%0AEmail%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%0AReason%20%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%0A%0A%E2%96%A0%20FEEDBACK%20%2F%20COMPLAINT%0AType%20(Bug%20%2F%20Suggestion%20%2F%20Other)%20%3A%20%0ADescription%20%3A%20%0A%0AThank%20you!" style="color: #60a5fa; font-weight: 600; text-decoration: none;">
               zechronaionyx1748@gmail.com
             </a>
           </p>
@@ -1384,6 +1599,18 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
           v("mapelInput");
         document.getElementById("lembar").className =
           v("ukuranKertas") === "f4" ? "f4-paper" : "a4-paper";
+        document.documentElement.style.setProperty(
+          '--print-size', v("ukuranKertas") === "f4" ? "215mm 330mm" : "A4"
+        );
+        const isF4 = v("ukuranKertas") === "f4";
+        const kotakToggle = document.getElementById("aktif-kotak-bawah");
+        const cardKotak = document.getElementById("card-kotak-bawah");
+        cardKotak.style.opacity = isF4 ? "1" : "0.4";
+        cardKotak.style.pointerEvents = isF4 ? "auto" : "none";
+        if (!isF4) {
+          kotakToggle.checked = false;
+          document.getElementById("area-kotak-bawah").style.display = "none";
+        }
         // ... ke bawahnya biarkan sama persis
 
         toggleSection("card-pg", "aktif-pg", "area-pg");
@@ -1416,6 +1643,12 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
       ["aktif-pg", "aktif-isian", "aktif-essay"].forEach((id) =>
         document.getElementById(id).addEventListener("change", updateAll),
       );
+
+      document.getElementById("aktif-kotak-bawah").addEventListener("change", function() {
+        const isF4 = v("ukuranKertas") === "f4";
+        document.getElementById("area-kotak-bawah").style.display = (this.checked && isF4) ? "flex" : "none";
+      });
+
       ["nomor-isian", "nomor-essay"].forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.addEventListener("change", updateAll);
@@ -1491,6 +1724,30 @@ onlineRef.on("value", snap => {
       }, { passive: true });
 
       document.addEventListener('touchmove', function(e) {
+        const panelBody = document.querySelector('.panel-body');
+        const previewArea = document.getElementById('preview-area');
+        const target = e.target;
+
+        // Kalau di preview area — bebas scroll semua arah, jangan di-prevent
+        if (previewArea && previewArea.contains(target)) {
+          e.stopPropagation();
+          return;
+        }
+
+        // Kalau di panel body — cegah bounce di ujung atas/bawah aja
+        if (panelBody && panelBody.contains(target)) {
+          const atTop = panelBody.scrollTop <= 0;
+          const atBottom = panelBody.scrollTop + panelBody.clientHeight >= panelBody.scrollHeight - 1;
+          const goingDown = e.touches[0].clientY < touchStartY;
+          const goingUp = e.touches[0].clientY > touchStartY;
+
+          if ((atTop && goingUp) || (atBottom && goingDown)) {
+            e.preventDefault();
+          }
+          return;
+        }
+
+        // Selain itu — cegah pull-to-refresh
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         if (scrollTop === 0 && e.touches[0].clientY > touchStartY) {
           e.preventDefault();
@@ -1542,9 +1799,7 @@ onlineRef.on("value", snap => {
     floatingToggle.style.display = (hidden && isMobile) ? "flex" : "none";
     floatingToggle.onclick = function() { setSidebarState(false); };
   }
-  if (floatingPrint) floatingPrint.style.display = hidden ? "inline-flex" : "none";
 }
-
 document.getElementById("toggleSidebarBtn").addEventListener("click", function () {
   const panel = document.getElementById("panel");
   const isHidden = !panel.classList.contains("sidebar-hidden");
@@ -1638,6 +1893,29 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 1000);
 
     </script>
+    <!-- Settings button -->
+<button id="settings-btn" title="Settings">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+  </svg>
+</button>
+
+<!-- Settings dropdown -->
+<div id="settings-dropdown">
+  <div class="settings-menu-item" id="menu-bahasa">
+    <span>🌐 Bahasa</span>
+    <span class="settings-arrow">›</span>
+    <div class="settings-submenu" id="submenu-bahasa">
+      <button class="lang-option active" id="lang-id" onclick="setLang('id')">
+        🇮🇩 ID
+      </button>
+      <button class="lang-option" id="lang-en" onclick="setLang('en')">
+        🇺🇸 EN
+      </button>
+    </div>
+  </div>
+</div>
     <!-- Floating toggle button -->
 <button id="floating-toggle">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1660,6 +1938,191 @@ document.addEventListener("DOMContentLoaded", function () {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js');
     }
+  // ===== SETTINGS BUTTON =====
+const settingsBtn = document.getElementById('settings-btn');
+const settingsDropdown = document.getElementById('settings-dropdown');
+
+settingsBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  const isOpen = settingsDropdown.classList.contains('open');
+  settingsDropdown.classList.toggle('open', !isOpen);
+  settingsBtn.classList.toggle('open', !isOpen);
+  // Tutup submenu kalau dropdown ditutup
+  if (isOpen) {
+    document.getElementById('menu-bahasa').classList.remove('open');
+  }
+});
+
+document.getElementById('menu-bahasa').addEventListener('click', function(e) {
+  e.stopPropagation();
+  this.classList.toggle('open');
+});
+
+document.addEventListener('click', function(e) {
+  if (!settingsBtn.contains(e.target) && !settingsDropdown.contains(e.target)) {
+    settingsDropdown.classList.remove('open');
+    settingsBtn.classList.remove('open');
+    document.getElementById('menu-bahasa').classList.remove('open');
+  }
+});
+
+// ===== SISTEM BAHASA =====
+const translations = {
+  id: {
+    toolTitle: "⚙ TOOL ADJUSTMENT",
+    subTitle: "Generator Lembar Jawaban by Zech",
+    kopSekolah: "Kop Sekolah",
+    logoLabel: "Logo Sekolah",
+    logoUpload: "📁 Klik untuk upload logo",
+    baris1Label: "Teks Baris 1",
+    baris2Label: "Teks Baris 2",
+    baris3Label: "Teks Baris 3",
+    halamanSiswa: "Halaman & Siswa",
+    ukuranKertas: "Ukuran Kertas",
+    kelasLabel: "Kelas",
+    mapelLabel: "Mata Pelajaran",
+    opsiTambahan: "Opsi Tambahan",
+    kotakNilai: "Kotak Nilai & Paraf",
+    kotakNote: "* Opsi hanya tersedia untuk kertas F4",
+    konfigSoal: "Konfigurasi Soal",
+    pgTitle: "I. Pilihan Ganda",
+    isianTitle: "II. Isian",
+    essayTitle: "III. Essay",
+    jmlSoal: "Jumlah Soal",
+    opsiJawaban: "Opsi Jawaban",
+    penomoran: "Penomoran",
+    lanjutPG: "Lanjut dari PG",
+    mulai1: "Mulai dari 1",
+    lanjutPGIsian: "Lanjut dari PG+Isian",
+    cetakBtn: "Cetak Lembar Jawaban",
+    judulLembar: "LEMBAR JAWAB",
+    namaLabel: "Nama",
+    mapelDisplay: "Mata Pelajaran",
+    kelasDisplay: "Kelas",
+    hariTanggal: "Hari / Tanggal",
+    nilaiLabel: "Nilai",
+    parafLabel: "Paraf Orang Tua",
+  },
+  en: {
+    toolTitle: "⚙ TOOL ADJUSTMENT",
+    subTitle: "Answer Sheet Generator by Zech",
+    kopSekolah: "School Header",
+    logoLabel: "School Logo",
+    logoUpload: "📁 Click to upload logo",
+    baris1Label: "Line 1 Text",
+    baris2Label: "Line 2 Text",
+    baris3Label: "Line 3 Text",
+    halamanSiswa: "Page & Student",
+    ukuranKertas: "Paper Size",
+    kelasLabel: "Class",
+    mapelLabel: "Subject",
+    opsiTambahan: "Extra Options",
+    kotakNilai: "Score & Signature Box",
+    kotakNote: "* Only available for F4 paper",
+    konfigSoal: "Question Config",
+    pgTitle: "I. Multiple Choice",
+    isianTitle: "II. Fill in the Blank",
+    essayTitle: "III. Essay",
+    jmlSoal: "Total Questions",
+    opsiJawaban: "Answer Options",
+    penomoran: "Numbering",
+    lanjutPG: "Continue from MC",
+    mulai1: "Start from 1",
+    lanjutPGIsian: "Continue from MC+Fill",
+    cetakBtn: "Print Answer Sheet",
+    judulLembar: "ANSWER SHEET",
+    namaLabel: "Name",
+    mapelDisplay: "Subject",
+    kelasDisplay: "Class",
+    hariTanggal: "Day / Date",
+    nilaiLabel: "Score",
+    parafLabel: "Parent Sign",
+  }
+};
+
+function setLang(code) {
+  const t = translations[code];
+
+  // Panel
+  document.querySelector('.panel-header h1').childNodes[0].textContent = t.toolTitle + ' ';
+  document.querySelector('.panel-header-text p').childNodes[0].textContent = t.subTitle;
+
+  // Section titles
+  const sectionTitles = document.querySelectorAll('.panel-section-title');
+  sectionTitles[0].innerHTML = sectionTitles[0].innerHTML.replace(/.*/, t.kopSekolah);
+  sectionTitles[1].innerHTML = sectionTitles[1].innerHTML.replace(/.*/, t.halamanSiswa);
+  sectionTitles[2].innerHTML = sectionTitles[2].innerHTML.replace(/.*/, t.opsiTambahan);
+  sectionTitles[3].innerHTML = sectionTitles[3].innerHTML.replace(/.*/, t.konfigSoal);
+
+  // Form labels
+  const labels = document.querySelectorAll('.form-group label');
+  labels[0].textContent = t.logoLabel;
+  labels[1].textContent = t.baris1Label;
+  labels[2].textContent = t.baris2Label;
+  labels[3].textContent = t.baris3Label;
+  labels[4].textContent = t.ukuranKertas;
+  labels[5].textContent = t.kelasLabel;
+  labels[6].textContent = t.mapelLabel;
+  labels[7].textContent = t.jmlSoal;
+  labels[8].textContent = t.opsiJawaban;
+  labels[9].textContent = t.jmlSoal;
+  labels[10].textContent = t.penomoran;
+  labels[11].textContent = t.jmlSoal;
+  labels[12].textContent = t.penomoran;
+
+  // Upload text
+  const uploadText = document.getElementById('logoUploadText');
+  if (!uploadText.querySelector('small') || uploadText.querySelector('small').style.color !== 'rgb(16, 185, 129)') {
+    uploadText.innerHTML = `${t.logoUpload}<br><small style="font-size:14px;opacity:0.6">PNG, JPG, SVG</small>`;
+  }
+
+  // Dropdown options
+  document.querySelector('#nomor-isian option[value="lanjut"]').textContent = t.lanjutPG;
+  document.querySelector('#nomor-isian option[value="mulai1"]').textContent = t.mulai1;
+  document.querySelector('#nomor-essay option[value="lanjut"]').textContent = t.lanjutPGIsian;
+  document.querySelector('#nomor-essay option[value="mulai1"]').textContent = t.mulai1;
+
+  // Section card headers — pakai id spesifik biar aman
+  document.querySelector('#card-kotak-bawah .section-card-header span').textContent = t.kotakNilai;
+  document.querySelector('#card-pg .section-card-header span').textContent = t.pgTitle;
+  document.querySelector('#card-isian .section-card-header span').textContent = t.isianTitle;
+  document.querySelector('#card-essay .section-card-header span').textContent = t.essayTitle;
+
+  // Kotak note
+  document.querySelector('#card-kotak-bawah div[style*="font-size:10px"]').textContent = t.kotakNote;
+
+  // Print button
+  document.querySelector('#floating-print').childNodes[1]
+    ? (document.querySelector('#floating-print').lastChild.textContent = ' ' + t.cetakBtn)
+    : null;
+
+  // Lembar jawab
+  document.querySelector('.judul-box').textContent = t.judulLembar;
+  const idLabels = document.querySelectorAll('.identitas-label');
+  idLabels[0].textContent = t.namaLabel;
+  idLabels[1].textContent = t.mapelDisplay;
+  idLabels[2].textContent = t.kelasDisplay;
+  idLabels[3].textContent = t.hariTanggal;
+
+  // Kotak nilai
+  const kotakLabels = document.querySelectorAll('.kotak-nilai-label');
+  if (kotakLabels[0]) kotakLabels[0].textContent = t.nilaiLabel;
+  if (kotakLabels[1]) kotakLabels[1].textContent = t.parafLabel;
+
+  // Bagian titles di lembar
+  const bagianTitles = document.querySelectorAll('.bagian-title');
+  if (bagianTitles[0]) bagianTitles[0].textContent = t.pgTitle;
+  if (bagianTitles[1]) bagianTitles[1].textContent = t.isianTitle;
+  if (bagianTitles[2]) bagianTitles[2].textContent = t.essayTitle;
+
+  // Active state tombol bahasa
+  document.getElementById('lang-id').classList.toggle('active', code === 'id');
+  document.getElementById('lang-en').classList.toggle('active', code === 'en');
+
+  // Tutup dropdown
+  settingsDropdown.classList.remove('open');
+  settingsBtn.classList.remove('open');
+}
   </script>
   </body>
 </html>
