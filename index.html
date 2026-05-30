@@ -61,10 +61,10 @@ input[type="number"].input-error {
         height: 100vh;
         position: relative;
         overflow: hidden;
-        /* Kunci utama animasi menciut yang mulus */
         transition:
           width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-          min-width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+          min-width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          overflow 0s linear 0.35s;
       }
 
       .panel-header {
@@ -738,7 +738,7 @@ input[type="number"].input-error {
         position: absolute;
         top: 15px;
         right: 15px;
-        z-index: 10;
+        z-index: 999;
         flex-shrink: 0;
         background: var(--panel-surface);
         color: var(--panel-text);
@@ -762,6 +762,12 @@ input[type="number"].input-error {
         border-color: var(--panel-accent);
       }
 
+      #panel.sidebar-hidden .btn-toggle-sidebar {
+        position: fixed;
+        top: 15px;
+        left: 10px;
+        z-index: 999;
+      }
       #panel.sidebar-hidden .btn-toggle-sidebar:hover {
         background: var(--panel-accent);
         color: white;
@@ -786,6 +792,7 @@ input[type="number"].input-error {
       #panel.sidebar-hidden {
         width: 56px;
         min-width: 56px;
+        overflow: visible;
       }
 
       /* Sembunyikan konten internal secara halus */
@@ -798,15 +805,45 @@ input[type="number"].input-error {
         overflow: hidden;
       }
 
-      #panel.sidebar-hidden .btn-toggle-sidebar {
-        position: relative;
-        top: 15px;
-        left: 50%;
-        transform: translateX(-50%);
-        right: unset;
-        background: var(--panel-surface);
-        color: var(--panel-text);
-        border-color: var(--panel-border);
+      .sidebar-collapsed-label {
+        position: fixed;
+        opacity: 0;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        width: 56px;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 70px;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--panel-accent);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        text-align: center;
+        cursor: default;
+        user-select: none;
+        z-index: 998;
+        text-shadow: 0 0 8px rgba(59,130,246,0.6), 0 0 20px rgba(59,130,246,0.3);
+        transition: text-shadow 0.3s ease, color 0.3s ease;
+      }
+      .sidebar-collapsed-label:hover {
+        color: #93c5fd;
+        text-shadow: 0 0 12px rgba(147,197,253,0.9), 0 0 30px rgba(59,130,246,0.6), 0 0 50px rgba(59,130,246,0.3);
+      }
+      @media print {
+        .sidebar-collapsed-label {
+          display: none !important;
+        }
+      }
+      .sidebar-collapsed-label.visible {
+        opacity: 1;
+        pointer-events: none;
+        transition: opacity 0.3s ease 0.2s;
       }
       /* MODIFIKASI RESPONSIF: Khusus Layar Ponsel */
       @media (max-width: 768px) {
@@ -1090,11 +1127,9 @@ input[type="number"].input-error {
 </script>
   </head>
   <body>
+    <div class="sidebar-collapsed-label">Generator LJ by Zech</div>
     <div id="panel">
-      <button
-        class="btn-toggle-sidebar"
-        id="toggleSidebarBtn"
-      >
+      <button class="btn-toggle-sidebar" id="toggleSidebarBtn">
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -1792,6 +1827,8 @@ onlineRef.on("value", snap => {
   const floatingPrint = document.getElementById("floating-print");
 
   panel.classList.toggle("sidebar-hidden", hidden);
+  const label = document.querySelector(".sidebar-collapsed-label");
+  if (label) label.classList.toggle("visible", hidden);
   const btnSvg = document.querySelector("#toggleSidebarBtn svg");
   if (btnSvg) btnSvg.style.transform = hidden ? "rotate(90deg)" : "rotate(0deg)";
   const isMobile = window.innerWidth <= 768;
