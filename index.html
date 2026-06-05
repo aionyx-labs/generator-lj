@@ -72,14 +72,12 @@ input[type="number"].input-error {
         border-bottom: 1px solid var(--panel-border);
         background: linear-gradient(135deg, #1a2535, #0f1923);
         flex-shrink: 0;
-        /* Tambahan agar teks dan tombol bisa berjejer kesamping */
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 10px;
       }
 
-      /* Pembungkus teks judul */
       .panel-header-text {
         flex: 1;
       }
@@ -398,32 +396,27 @@ input[type="number"].input-error {
       /* KOP */
       .kop-sekolah {
         display: flex;
-        align-items: center; /* Memastikan logo dan teks sejajar secara vertikal */
-        justify-content: center; /* Menjaga seluruh komponen kop tetap di tengah */
+        align-items: center;
+        justify-content: center;
         padding-bottom: 5px;
         border-bottom: 3px solid #000;
         margin-bottom: 5px;
       }
       .kop-logo {
-        width: 55px; /* Tingkatkan dari 55px ke 75px agar lebih gagah */
+        width: 55px;
         height: auto;
         object-fit: contain;
         flex-shrink: 0;
-        margin-right: 0px; /* Dorong teks di sebelah kanan agar tidak menempel */
-        margin-top: 10px; /* Ubah angka ini untuk menggeser logo ke bawah (+px) atau ke atas (-px) */
-        margin-left: 30px; /* Ubah angka ini untuk menggeser logo menjauh atau mendekat dari tepi kiri */
+        margin-right: 0px;
+        margin-top: 10px;
+        margin-left: 30px;
       }
       .kop-teks {
         flex: 1;
         text-align: center;
         line-height: 1.3;
-        /* Kuncinya di sini: margin-right harus disamakan dengan total ruang logo di kiri.
-      Logo Anda memiliki width 55px + margin-left 20px = 75px.
-      Kita kurangi sedikit untuk kompensasi visual agar teks benar-benar presisi di tengah.
-    */
         margin-right: 75px;
       }
-      /* Ubah font size Kop Sekolah lebih besar & berwibawa */
       .kop-teks .baris1 {
         font-size: 14pt;
         font-weight: 650;
@@ -446,7 +439,6 @@ input[type="number"].input-error {
         text-align: center;
         padding: 4px 10px;
         margin-bottom: 5px;
-        /* Ubah ukuran & gaya font LEMBAR JAWAB */
         font-size: 10pt;
         font-weight: 600;
         font-style: italic;
@@ -499,7 +491,6 @@ input[type="number"].input-error {
         margin-bottom: 6px;
       }
 
-      /* Jarak antar bagian agar tidak sumpek */
       .bagian-wrapper {
         margin-top: 9px;
         margin-bottom: 4px;
@@ -540,7 +531,6 @@ input[type="number"].input-error {
         height: 50px;
       }
 
-      /* ===== MODE CETAK HITAM PUTIH ===== */
       @media print {
         body.bw-mode #lembar * {
           color: #000 !important;
@@ -610,7 +600,7 @@ input[type="number"].input-error {
       .isian-columns-wrapper {
         display: flex;
         gap: 0;
-        margin-top: 12px; /* Ditambah agar tidak menempel dengan garis judul bagian */
+        margin-top: 12px;
       }
       .isian-column {
         flex: 1;
@@ -649,7 +639,7 @@ input[type="number"].input-error {
       .essay-columns-wrapper {
         display: flex;
         gap: 12px;
-        margin-top: 12px; /* Ditambah agar ruang menulis soal essay pertama lebih longgar */
+        margin-top: 12px;
       }
       .essay-column {
         flex: 1;
@@ -779,7 +769,6 @@ input[type="number"].input-error {
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      /* Kunci agar teks input tidak berdesakan ke bawah saat lebar panel mengecil */
       .panel-header,
       .panel-body,
       .panel-footer {
@@ -795,7 +784,6 @@ input[type="number"].input-error {
         overflow: visible;
       }
 
-      /* Sembunyikan konten internal secara halus */
       #panel.sidebar-hidden .panel-header,
       #panel.sidebar-hidden .panel-body,
       #panel.sidebar-hidden .panel-footer {
@@ -845,7 +833,6 @@ input[type="number"].input-error {
         pointer-events: none;
         transition: opacity 0.3s ease 0.2s;
       }
-      /* MODIFIKASI RESPONSIF: Khusus Layar Ponsel */
       @media (max-width: 768px) {
   body {
     flex-direction: column;
@@ -1124,7 +1111,6 @@ input[type="number"].input-error {
 </script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-</script>
   </head>
   <body>
     <div class="sidebar-collapsed-label">Generator LJ by Zech</div>
@@ -1146,7 +1132,7 @@ input[type="number"].input-error {
       <div class="panel-header">
         <div class="panel-header-text">
           <h1>⚙ TOOL ADJUSTMENT</h1>
-          <p>Generator LJ by Zech<span style="opacity:0.5; font-size:10px;"> v1.17</span></p>
+          <p>Generator LJ by Zech<span style="opacity:0.5; font-size:10px;"> v1.19</span></p>
           <p id="online-count" style="font-size:10px; font-family:'Poppins',sans-serif; color:#22c55e; font-weight:600; letter-spacing:1px; text-shadow:0 0 8px #22c55e;">● 0 online</p>
         </div>
       </div>
@@ -1413,7 +1399,7 @@ const wmUnlocked = sessionStorage.getItem("wm_unlocked");
 
 const wm = document.createElement('div');
 wm.id = 'watermark';
-wm.textContent = 'LJ BY ZECH'; // Ubah teks watermark sesuai keinginan
+wm.textContent = 'LJ BY ZECH';
 wm.style.cssText = `
   position:fixed; inset:0; pointer-events:none; z-index:1;
   display:flex; align-items:center; justify-content:center;
@@ -1483,14 +1469,17 @@ document.body.appendChild(popup);
 
 document.getElementById("tutupPopup").addEventListener("click", () => {
   const kode = document.getElementById("inputWm").value;
-  if (kode === "ZECHG30HZ") {  // ← Password WM
+  const secretPattern = [90, 69, 67, 72, 71, 51, 48, 72, 90]; 
+  const isValid = kode.length === secretPattern.length && 
+                  kode.split('').every((char, i) => char.charCodeAt(0) === secretPattern[i]);
+
+  if (isValid) {  
     wm.style.display = "none";
     sessionStorage.setItem("wm_unlocked", "true");
   }
   popup.style.animation = "fadeIn 0.2s ease reverse";
   setTimeout(() => popup.remove(), 200);
 });
-      // =========================================================================
       const defaultLogo = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='38' fill='%23f0f0f0' stroke='%23999' stroke-width='2'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23aaa'/%3E%3Cellipse cx='40' cy='62' rx='20' ry='12' fill='%23aaa'/%3E%3C/svg%3E`;
       document.getElementById("kop-logo").src = defaultLogo;
 
@@ -1524,7 +1513,7 @@ document.getElementById("tutupPopup").addEventListener("click", () => {
 
         const wrap = document.getElementById("pg-columns-wrapper");
         wrap.innerHTML = "";
-        const n = Math.min(50, iv("jml-pg")); // Maksimal 50 Soal
+        const n = Math.min(50, iv("jml-pg"));
         const opsi = iv("opsi-pg");
 
         // Logika kolom disesuaikan: Kunci 10 baris per kolom
@@ -1624,7 +1613,6 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
       }
 
       function updateAll() {
-        // Jika input kosong, otomatis gunakan teks contoh bawaan ini di kertas pratinjau
         document.getElementById("kop-baris1").textContent =
           v("baris1") || "PENILAIAN AKHIR SATUAN PENDIDIKAN";
         document.getElementById("kop-baris2").textContent =
@@ -1649,8 +1637,6 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
           kotakToggle.checked = false;
           document.getElementById("area-kotak-bawah").style.display = "none";
         }
-        // ... ke bawahnya biarkan sama persis
-
         toggleSection("card-pg", "aktif-pg", "area-pg");
         toggleSection("card-isian", "aktif-isian", "area-isian");
         toggleSection("card-essay", "aktif-essay", "area-essay");
@@ -1702,7 +1688,6 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
         updateAll();
       }
       updateAll();
-      // Firebase Online Counter
 const firebaseConfig = { databaseURL: "https://generator-lj-default-rtdb.asia-southeast1.firebasedatabase.app" };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
@@ -1714,9 +1699,6 @@ onlineRef.on("value", snap => {
   document.getElementById("online-count").textContent = `● ${count} online`;
 });
 
-      // =========================================================================
-      // BLOKIR REFRESH  ← TAMBAHKAN DI SINI
-      // =========================================================================
       window.addEventListener('beforeunload', function(e) {
         e.preventDefault();
         e.returnValue = '';
@@ -1738,8 +1720,6 @@ onlineRef.on("value", snap => {
 
       document.body.style.overscrollBehavior = 'none';
       document.documentElement.style.overscrollBehavior = 'none';
-
-      // Swipe gesture variables
       let touchStartX = 0;
       let touchStartY = 0;
       let touchEndX = 0;
@@ -1754,7 +1734,6 @@ onlineRef.on("value", snap => {
         const floatingToggle = document.getElementById("floating-toggle");
         const toggleSidebarBtn = document.getElementById("toggleSidebarBtn");
         
-        // Check apakah touch berada di area tombol hamburger
         isTouchInToggleArea = 
           (floatingToggle && floatingToggle.contains(touchElement)) ||
           (toggleSidebarBtn && toggleSidebarBtn.contains(touchElement)) ||
@@ -1765,14 +1744,10 @@ onlineRef.on("value", snap => {
         const panelBody = document.querySelector('.panel-body');
         const previewArea = document.getElementById('preview-area');
         const target = e.target;
-
-        // Kalau di preview area — bebas scroll semua arah, jangan di-prevent
         if (previewArea && previewArea.contains(target)) {
           e.stopPropagation();
           return;
         }
-
-        // Kalau di panel body — cegah bounce di ujung atas/bawah aja
         if (panelBody && panelBody.contains(target)) {
           const atTop = panelBody.scrollTop <= 0;
           const atBottom = panelBody.scrollTop + panelBody.clientHeight >= panelBody.scrollHeight - 1;
@@ -1784,8 +1759,6 @@ onlineRef.on("value", snap => {
           }
           return;
         }
-
-        // Selain itu — cegah pull-to-refresh
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         if (scrollTop === 0 && e.touches[0].clientY > touchStartY) {
           e.preventDefault();
@@ -1805,25 +1778,17 @@ onlineRef.on("value", snap => {
         const panel = document.getElementById("panel");
         const isMobile = window.innerWidth <= 768;
         const isHidden = panel.classList.contains("sidebar-hidden");
-        
         if (!isMobile) return;
-        
         const diffX = touchEndX - touchStartX;
         const diffY = touchEndY - touchStartY;
-        
-        // Swipe dari kiri ke kanan untuk buka sidebar
         if (diffX > 80 && Math.abs(diffY) < 50 && isHidden) {
           setSidebarState(false);
         }
-        // Swipe dari kanan ke kiri untuk tutup sidebar
         else if (diffX < -80 && Math.abs(diffY) < 50 && !isHidden) {
           setSidebarState(true);
         }
       }
-
-      // =========================================================================
       // LOGIKA SEMBUNYIKAN / TAMPILKAN SIDEBAR
-      // =========================================================================
       function setSidebarState(hidden) {
   const panel = document.getElementById("panel");
   const floatingToggle = document.getElementById("floating-toggle");
@@ -1854,11 +1819,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-      // =========================================================================
       // BLOKIR INSPECT ELEMENT
-      // =========================================================================
-
-      // Blokir klik kanan - diam saja
       document.addEventListener("contextmenu", function (e) {
         e.preventDefault();
       });
@@ -1911,11 +1872,13 @@ document.addEventListener("DOMContentLoaded", function () {
     navigator.clipboard.writeText('').catch(()=>{});
   }
 });
-      // Deteksi DevTools terbuka
+      // Deteksi DevTools
       setInterval(function() {
         const threshold = 160;
-        if (window.outerWidth - window.innerWidth > threshold || 
-            window.outerHeight - window.innerHeight > threshold) {
+        const isDevToolsOpen = (window.outerWidth - window.innerWidth > threshold || 
+                                window.outerHeight - window.innerHeight > threshold);
+        
+        if (isDevToolsOpen) {
           sessionStorage.removeItem('wm_unlocked');
           document.body.innerHTML = `
             <div style="color:#ef4444;display:flex;flex-direction:column;
@@ -1929,8 +1892,19 @@ document.addEventListener("DOMContentLoaded", function () {
               color:white;border:none;border-radius:8px;cursor:pointer;
               font-size:14px;font-weight:600;">🔄 Muat Ulang</button>
             </div>`;
+          
+          (function freeze() {
+            createFunction();
+          })();
         }
-      }, 1000);
+      }, 500);
+
+      function createFunction() {
+        const func = function() {
+          eval("debugger");
+        };
+        func();
+      }
 
     </script>
     <!-- Settings button -->
@@ -2082,19 +2056,13 @@ const translations = {
 
 function setLang(code) {
   const t = translations[code];
-
-  // Panel
   document.querySelector('.panel-header h1').childNodes[0].textContent = t.toolTitle + ' ';
   document.querySelector('.panel-header-text p').childNodes[0].textContent = t.subTitle;
-
-  // Section titles
   const sectionTitles = document.querySelectorAll('.panel-section-title');
   sectionTitles[0].innerHTML = sectionTitles[0].innerHTML.replace(/.*/, t.kopSekolah);
   sectionTitles[1].innerHTML = sectionTitles[1].innerHTML.replace(/.*/, t.halamanSiswa);
   sectionTitles[2].innerHTML = sectionTitles[2].innerHTML.replace(/.*/, t.opsiTambahan);
   sectionTitles[3].innerHTML = sectionTitles[3].innerHTML.replace(/.*/, t.konfigSoal);
-
-  // Form labels
   const labels = document.querySelectorAll('.form-group label');
   labels[0].textContent = t.logoLabel;
   labels[1].textContent = t.baris1Label;
@@ -2109,57 +2077,37 @@ function setLang(code) {
   labels[10].textContent = t.penomoran;
   labels[11].textContent = t.jmlSoal;
   labels[12].textContent = t.penomoran;
-
-  // Upload text
   const uploadText = document.getElementById('logoUploadText');
   if (!uploadText.querySelector('small') || uploadText.querySelector('small').style.color !== 'rgb(16, 185, 129)') {
     uploadText.innerHTML = `${t.logoUpload}<br><small style="font-size:14px;opacity:0.6">PNG, JPG, SVG</small>`;
   }
-
-  // Dropdown options
   document.querySelector('#nomor-isian option[value="lanjut"]').textContent = t.lanjutPG;
   document.querySelector('#nomor-isian option[value="mulai1"]').textContent = t.mulai1;
   document.querySelector('#nomor-essay option[value="lanjut"]').textContent = t.lanjutPGIsian;
   document.querySelector('#nomor-essay option[value="mulai1"]').textContent = t.mulai1;
-
-  // Section card headers — pakai id spesifik biar aman
   document.querySelector('#card-kotak-bawah .section-card-header span').textContent = t.kotakNilai;
   document.querySelector('#card-pg .section-card-header span').textContent = t.pgTitle;
   document.querySelector('#card-isian .section-card-header span').textContent = t.isianTitle;
   document.querySelector('#card-essay .section-card-header span').textContent = t.essayTitle;
-
-  // Kotak note
   document.querySelector('#card-kotak-bawah div[style*="font-size:10px"]').textContent = t.kotakNote;
-
-  // Print button
   document.querySelector('#floating-print').childNodes[1]
     ? (document.querySelector('#floating-print').lastChild.textContent = ' ' + t.cetakBtn)
     : null;
-
-  // Lembar jawab
   document.querySelector('.judul-box').textContent = t.judulLembar;
   const idLabels = document.querySelectorAll('.identitas-label');
   idLabels[0].textContent = t.namaLabel;
   idLabels[1].textContent = t.mapelDisplay;
   idLabels[2].textContent = t.kelasDisplay;
   idLabels[3].textContent = t.hariTanggal;
-
-  // Kotak nilai
   const kotakLabels = document.querySelectorAll('.kotak-nilai-label');
   if (kotakLabels[0]) kotakLabels[0].textContent = t.nilaiLabel;
   if (kotakLabels[1]) kotakLabels[1].textContent = t.parafLabel;
-
-  // Bagian titles di lembar
   const bagianTitles = document.querySelectorAll('.bagian-title');
   if (bagianTitles[0]) bagianTitles[0].textContent = t.pgTitle;
   if (bagianTitles[1]) bagianTitles[1].textContent = t.isianTitle;
   if (bagianTitles[2]) bagianTitles[2].textContent = t.essayTitle;
-
-  // Active state tombol bahasa
   document.getElementById('lang-id').classList.toggle('active', code === 'id');
   document.getElementById('lang-en').classList.toggle('active', code === 'en');
-
-  // Tutup dropdown
   settingsDropdown.classList.remove('open');
   settingsBtn.classList.remove('open');
 }
