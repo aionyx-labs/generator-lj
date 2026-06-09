@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#3b82f6" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.gstatic.com https://www.googletagmanager.com https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.gstatic.com; connect-src 'self' https://generator-lj-default-rtdb.asia-southeast1.firebasedatabase.app https://www.google-analytics.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com; connect-src 'self' https://aionyx-hub-default-rtdb.asia-southeast1.firebasedatabase.app wss://aionyx-hub-default-rtdb.asia-southeast1.firebasedatabase.app;">
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Generator LJA" />
@@ -1133,8 +1133,7 @@ input[type="number"].input-error {
       <div class="panel-header">
         <div class="panel-header-text">
           <h1>⚙ TOOL ADJUSTMENT</h1>
-          <p>Generator LJ by Zech<span style="opacity:0.5; font-size:10px;"> v1.19</span></p>
-          <p id="online-count" style="font-size:10px; font-family:'Poppins',sans-serif; color:#22c55e; font-weight:600; letter-spacing:1px; text-shadow:0 0 8px #22c55e;">● 0 online</p>
+          <p>Generator LJ by Zech</p>
         </div>
       </div>
 
@@ -1689,9 +1688,12 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
         updateAll();
       }
       updateAll();
-const firebaseConfig = { databaseURL: "https://generator-lj-default-rtdb.asia-southeast1.firebasedatabase.app" };
+const firebaseConfig = { databaseURL: "https://aionyx-hub-default-rtdb.asia-southeast1.firebasedatabase.app" };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
+db.ref("total_views").transaction(function(current) {
+  return (current || 0) + 1;
+});
 const onlineRef = db.ref("online");
 const myRef = onlineRef.push(true);
 myRef.onDisconnect().remove();
