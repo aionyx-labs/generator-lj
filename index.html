@@ -7,7 +7,10 @@
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#3b82f6" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com; connect-src 'self' https://aionyx-hub-default-rtdb.asia-southeast1.firebasedatabase.app wss://aionyx-hub-default-rtdb.asia-southeast1.firebasedatabase.app;">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com; connect-src 'self' https://aionyx-hub-default-rtdb.asia-southeast1.firebasedatabase.app wss://aionyx-hub-default-rtdb.asia-southeast1.firebasedatabase.app;"
+    />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Generator LJA" />
@@ -18,10 +21,10 @@
     />
     <style>
       input[type="number"]:invalid,
-input[type="number"].input-error {
-  border-color: #ef4444 !important;
-  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
-}
+      input[type="number"].input-error {
+        border-color: #ef4444 !important;
+        box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
+      }
       :root {
         --panel-bg: #0f1923;
         --panel-surface: #1a2535;
@@ -90,13 +93,20 @@ input[type="number"].input-error {
         letter-spacing: 1.5px;
         text-transform: uppercase;
         margin-bottom: 4px;
-        text-shadow: 0 0 8px rgba(59, 130, 246, 0.6), 0 0 20px rgba(59, 130, 246, 0.3);
-        transition: text-shadow 0.3s ease, color 0.3s ease;
+        text-shadow:
+          0 0 8px rgba(59, 130, 246, 0.6),
+          0 0 20px rgba(59, 130, 246, 0.3);
+        transition:
+          text-shadow 0.3s ease,
+          color 0.3s ease;
         cursor: default;
       }
       .panel-header h1:hover {
         color: #93c5fd;
-        text-shadow: 0 0 12px rgba(147, 197, 253, 0.9), 0 0 30px rgba(59, 130, 246, 0.6), 0 0 50px rgba(59, 130, 246, 0.3);
+        text-shadow:
+          0 0 12px rgba(147, 197, 253, 0.9),
+          0 0 30px rgba(59, 130, 246, 0.6),
+          0 0 50px rgba(59, 130, 246, 0.3);
       }
 
       @media (max-width: 768px) {
@@ -376,6 +386,15 @@ input[type="number"].input-error {
         align-items: flex-start;
         justify-content: center;
         padding: 24px 20px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--panel-border) transparent;
+      }
+      #preview-area::-webkit-scrollbar {
+        width: 6px;
+      }
+      #preview-area::-webkit-scrollbar-thumb {
+        background: var(--panel-border);
+        border-radius: 3px;
       }
 
       /* ===== LEMBAR JAWABAN ===== */
@@ -665,9 +684,9 @@ input[type="number"].input-error {
         padding-left: 25px;
       }
       .essay-line {
-  border-bottom: 1px solid #000;
-  height: 1.1em;
-}
+        border-bottom: 1px solid #000;
+        height: 1.1em;
+      }
       #watermark {
         position: fixed;
         inset: 0;
@@ -682,7 +701,7 @@ input[type="number"].input-error {
         color: #000;
         transform: rotate(-30deg);
         user-select: none;
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
         white-space: nowrap;
       }
       /* ===== PRINT ===== */
@@ -817,12 +836,19 @@ input[type="number"].input-error {
         cursor: default;
         user-select: none;
         z-index: 998;
-        text-shadow: 0 0 8px rgba(59,130,246,0.6), 0 0 20px rgba(59,130,246,0.3);
-        transition: text-shadow 0.3s ease, color 0.3s ease;
+        text-shadow:
+          0 0 8px rgba(59, 130, 246, 0.6),
+          0 0 20px rgba(59, 130, 246, 0.3);
+        transition:
+          text-shadow 0.3s ease,
+          color 0.3s ease;
       }
       .sidebar-collapsed-label:hover {
         color: #93c5fd;
-        text-shadow: 0 0 12px rgba(147,197,253,0.9), 0 0 30px rgba(59,130,246,0.6), 0 0 50px rgba(59,130,246,0.3);
+        text-shadow:
+          0 0 12px rgba(147, 197, 253, 0.9),
+          0 0 30px rgba(59, 130, 246, 0.6),
+          0 0 50px rgba(59, 130, 246, 0.3);
       }
       @media print {
         .sidebar-collapsed-label {
@@ -835,283 +861,296 @@ input[type="number"].input-error {
         transition: opacity 0.3s ease 0.2s;
       }
       @media (max-width: 768px) {
-  body {
-    flex-direction: column;
-    overflow: hidden;
-    height: 100vh;
-    max-height: 100vh;
-  }
-  #panel {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 999;
-    box-shadow: 5px 0 20px rgba(0,0,0,0.3);
-    width: 280px !important;
-    min-width: 280px !important;
-    transform: translateX(0);
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-  }
-  .panel-header,
-  .panel-body,
-  .panel-footer {
-    width: 280px;
-  }
-  #preview-area {
-    margin-left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow-x: auto;
-    overflow-y: auto;
-    padding: 12px 8px;
-    padding-bottom: 80px;
-    box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
-    display: block;
-    overscroll-behavior: contain;
-    scroll-behavior: auto;
-    touch-action: pan-x pan-y;
-    position: relative;
-    z-index: 1;
-  }
+        body {
+          flex-direction: column;
+          overflow: hidden;
+          height: 100vh;
+          max-height: 100vh;
+        }
+        #panel {
+          position: fixed;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          z-index: 999;
+          box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+          width: 280px !important;
+          min-width: 280px !important;
+          transform: translateX(0);
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .panel-header,
+        .panel-body,
+        .panel-footer {
+          width: 280px;
+        }
+        #preview-area {
+          margin-left: 0;
+          width: 100vw;
+          height: 100vh;
+          overflow-x: auto;
+          overflow-y: auto;
+          padding: 12px 8px;
+          padding-bottom: 80px;
+          box-sizing: border-box;
+          -webkit-overflow-scrolling: touch;
+          display: block;
+          overscroll-behavior: contain;
+          scroll-behavior: auto;
+          touch-action: pan-x pan-y;
+          position: relative;
+          z-index: 1;
+        }
 
-  #lembar {
-    width: 210mm !important;
-    min-width: 210mm !important;
-    transform: none !important;
-    margin: 0 auto;
-  }
+        #lembar {
+          width: 210mm !important;
+          min-width: 210mm !important;
+          transform: none !important;
+          margin: 0 auto;
+        }
 
-  #lembar.f4-paper {
-    width: 215mm !important;
-    min-width: 215mm !important;
-  }
+        #lembar.f4-paper {
+          width: 215mm !important;
+          min-width: 215mm !important;
+        }
 
-  #panel.sidebar-hidden {
-    transform: translateX(-280px);
-    width: 280px !important;
-    min-width: 280px !important;
-  }
+        #panel.sidebar-hidden {
+          transform: translateX(-280px);
+          width: 280px !important;
+          min-width: 280px !important;
+        }
 
-  #panel.sidebar-hidden .btn-toggle-sidebar {
-    display: none;
-  }
+        #panel.sidebar-hidden .btn-toggle-sidebar {
+          display: none;
+        }
 
-  .panel-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 280px;
-    background: var(--panel-bg);
-    z-index: 1000;
-    padding-bottom: 20px;
-    border-top: 1px solid var(--panel-border);
-  }
+        .panel-footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 280px;
+          background: var(--panel-bg);
+          z-index: 1000;
+          padding-bottom: 20px;
+          border-top: 1px solid var(--panel-border);
+        }
 
-  .panel-body {
-    flex: 1;
-    overflow-y: scroll !important;
-    overflow-x: hidden;
-    height: auto;
-    max-height: calc(100vh - 140px);
-    padding-bottom: 80px;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: auto;
-    overscroll-behavior-y: contain;
-    touch-action: pan-y;
-  }
-}
-/* ===== TOMBOL GERIGI ===== */
-#settings-btn {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 1002;
-  background: var(--panel-surface);
-  color: var(--panel-text);
-  border: 1px solid var(--panel-border);
-  border-radius: 6px;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-#settings-btn:hover {
-  background: var(--panel-accent);
-  color: white;
-  border-color: var(--panel-accent);
-}
-#settings-btn svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-#settings-btn.open svg {
-  transform: rotate(90deg);
-}
+        .panel-body {
+          flex: 1;
+          overflow-y: scroll !important;
+          overflow-x: hidden;
+          height: auto;
+          max-height: calc(100vh - 140px);
+          padding-bottom: 80px;
+          -webkit-overflow-scrolling: touch;
+          scroll-behavior: auto;
+          overscroll-behavior-y: contain;
+          touch-action: pan-y;
+        }
+      }
+      /* ===== TOMBOL GERIGI ===== */
+      #settings-btn {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 1002;
+        background: var(--panel-surface);
+        color: var(--panel-text);
+        border: 1px solid var(--panel-border);
+        border-radius: 6px;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition:
+          background 0.2s,
+          color 0.2s,
+          border-color 0.2s;
+      }
+      #settings-btn:hover {
+        background: var(--panel-accent);
+        color: white;
+        border-color: var(--panel-accent);
+      }
+      #settings-btn svg {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      #settings-btn.open svg {
+        transform: rotate(90deg);
+      }
 
-#settings-dropdown {
-  position: fixed;
-  top: 58px;
-  right: 15px;
-  z-index: 1002;
-  background: var(--panel-surface);
-  border: 1px solid var(--panel-border);
-  border-radius: 10px;
-  padding: 6px;
-  min-width: 180px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  display: none;
-  flex-direction: column;
-  gap: 2px;
-  transform-origin: top right;
-  animation: dropdownIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-@keyframes dropdownIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
-}
-#settings-dropdown.open {
-  display: flex;
-}
-.settings-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--panel-text);
-  position: relative;
-  transition: background 0.15s;
-  user-select: none;
-}
-.settings-menu-item:hover {
-  background: rgba(59,130,246,0.12);
-}
-.settings-menu-item > span:first-child {
-  flex: 1;
-}
-.settings-arrow {
-  font-size: 14px;
-  color: var(--panel-muted);
-  transition: transform 0.2s;
-}
-.settings-menu-item.open .settings-arrow {
-  transform: rotate(90deg);
-}
-.settings-submenu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
-  background: var(--panel-surface);
-  border: 1px solid var(--panel-border);
-  border-radius: 8px;
-  padding: 4px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  flex-direction: column;
-  gap: 2px;
-  animation: dropdownIn 0.2s cubic-bezier(0.4,0,0.2,1);
-  z-index: 1003;
-}
-.settings-menu-item.open .settings-submenu {
-  display: flex;
-}
-.lang-option {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 7px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--panel-text);
-  border: none;
-  background: transparent;
-  font-family: 'Poppins', sans-serif;
-  transition: background 0.15s;
-  white-space: nowrap;
-}
-.lang-option:hover {
-  background: rgba(59,130,246,0.12);
-}
-.lang-option.active {
-  background: rgba(59,130,246,0.2);
-  color: #60a5fa;
-}
-/* Floating toggle button — muncul saat sidebar hidden */
-#floating-toggle {
-  display: none;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  z-index: 1001;
-  background: var(--panel-accent);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-#floating-toggle svg {
-  width: 16px;
-  height: 16px;
-}
+      #settings-dropdown {
+        position: fixed;
+        top: 58px;
+        right: 15px;
+        z-index: 1002;
+        background: var(--panel-surface);
+        border: 1px solid var(--panel-border);
+        border-radius: 10px;
+        padding: 6px;
+        min-width: 180px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        display: none;
+        flex-direction: column;
+        gap: 2px;
+        transform-origin: top right;
+        animation: dropdownIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      @keyframes dropdownIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      #settings-dropdown.open {
+        display: flex;
+      }
+      .settings-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--panel-text);
+        position: relative;
+        transition: background 0.15s;
+        user-select: none;
+      }
+      .settings-menu-item:hover {
+        background: rgba(59, 130, 246, 0.12);
+      }
+      .settings-menu-item > span:first-child {
+        flex: 1;
+      }
+      .settings-arrow {
+        font-size: 14px;
+        color: var(--panel-muted);
+        transition: transform 0.2s;
+      }
+      .settings-menu-item.open .settings-arrow {
+        transform: rotate(90deg);
+      }
+      .settings-submenu {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: calc(100% + 6px);
+        background: var(--panel-surface);
+        border: 1px solid var(--panel-border);
+        border-radius: 8px;
+        padding: 4px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        flex-direction: column;
+        gap: 2px;
+        animation: dropdownIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1003;
+      }
+      .settings-menu-item.open .settings-submenu {
+        display: flex;
+      }
+      .lang-option {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 7px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--panel-text);
+        border: none;
+        background: transparent;
+        font-family: "Poppins", sans-serif;
+        transition: background 0.15s;
+        white-space: nowrap;
+      }
+      .lang-option:hover {
+        background: rgba(59, 130, 246, 0.12);
+      }
+      .lang-option.active {
+        background: rgba(59, 130, 246, 0.2);
+        color: #60a5fa;
+      }
+      /* Floating toggle button — muncul saat sidebar hidden */
+      #floating-toggle {
+        display: none;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1001;
+        background: var(--panel-accent);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+      #floating-toggle svg {
+        width: 16px;
+        height: 16px;
+      }
 
-/* Floating print button — muncul saat sidebar hidden */
-#floating-print {
-  display: inline-flex;
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1001;
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 11px 28px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 20px rgba(59,130,246,0.4);
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-}
-#floating-print svg {
-  width: 15px;
-  height: 15px;
-}
+      /* Floating print button — muncul saat sidebar hidden */
+      #floating-print {
+        display: inline-flex;
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1001;
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 11px 28px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Poppins", sans-serif;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+      #floating-print svg {
+        width: 15px;
+        height: 15px;
+      }
     </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BC4WQG1GFL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-BC4WQG1GFL');
-</script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-BC4WQG1GFL"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-BC4WQG1GFL");
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   </head>
   <body>
     <div class="sidebar-collapsed-label">Generator LJ by Zech</div>
@@ -1199,7 +1238,7 @@ input[type="number"].input-error {
             <input type="text" id="kelasInput" value="I (Satu)" />
           </div>
           <div class="form-group">
-             <label>Mata Pelajaran</label>
+            <label>Mata Pelajaran</label>
             <input type="text" id="mapelInput" placeholder="Matematika" />
           </div>
         </div>
@@ -1209,9 +1248,21 @@ input[type="number"].input-error {
           <div class="section-card active" id="card-kotak-bawah">
             <div class="section-card-header">
               <span>Kotak Nilai & Paraf</span>
-              <label class="toggle"><input type="checkbox" id="aktif-kotak-bawah" /><span class="toggle-slider"></span></label>
+              <label class="toggle"
+                ><input type="checkbox" id="aktif-kotak-bawah" /><span
+                  class="toggle-slider"
+                ></span
+              ></label>
             </div>
-            <div style="font-size:10px; color:var(--panel-muted); margin-top:-4px;">* Opsi hanya tersedia untuk kertas F4</div>
+            <div
+              style="
+                font-size: 10px;
+                color: var(--panel-muted);
+                margin-top: -4px;
+              "
+            >
+              * Opsi hanya tersedia untuk kertas F4
+            </div>
           </div>
         </div>
 
@@ -1230,7 +1281,14 @@ input[type="number"].input-error {
             <div class="section-card-body">
               <div class="form-group">
                 <label>Jumlah Soal</label>
-                <input type="number" id="jml-pg" value="20" min="1" max="40" oninput="validateMax(this,40)" />
+                <input
+                  type="number"
+                  id="jml-pg"
+                  value="20"
+                  min="1"
+                  max="40"
+                  oninput="validateMax(this, 40)"
+                />
               </div>
               <div class="form-group">
                 <label>Opsi Jawaban</label>
@@ -1260,7 +1318,7 @@ input[type="number"].input-error {
                   value="5"
                   min="1"
                   max="15"
-                  oninput="validateMax(this,15)"
+                  oninput="validateMax(this, 15)"
                 />
               </div>
               <div class="form-group">
@@ -1291,7 +1349,7 @@ input[type="number"].input-error {
                   value="5"
                   min="1"
                   max="10"
-                  oninput="validateMax(this,10)"
+                  oninput="validateMax(this, 10)"
                 />
               </div>
               <div class="form-group">
@@ -1305,12 +1363,43 @@ input[type="number"].input-error {
           </div>
         </div>
       </div>
-      <div style="padding:12px 16px 16px;">
-        <a href="https://aionyx-labs.github.io/aionyx-hub/" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;padding:10px;background:#0f1923;border:1px solid #2a3a50;border-radius:8px;color:#64748b;font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:0.5px;text-align:center;text-decoration:none;box-sizing:border-box;transition:all 0.2s;" onmouseover="this.style.color='#93c5fd';this.style.borderColor='#3b82f6';this.style.background='rgba(59,130,246,0.08)'" onmouseout="this.style.color='#64748b';this.style.borderColor='#2a3a50';this.style.background='#0f1923'">← Kembali ke Aionyx Hub</a>
+      <div class="panel-footer" style="padding: 12px 16px 16px">
+        <a
+          id="btn-kembali-hub"
+          href="https://aionyx-labs.github.io/aionyx-hub/"
+          style="
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #0f1923;
+            border: 1px solid #2a3a50;
+            border-radius: 8px;
+            color: #64748b;
+            font-family: &quot;Poppins&quot;, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: all 0.2s;
+          "
+          onmouseover="
+            this.style.color = '#93c5fd';
+            this.style.borderColor = '#3b82f6';
+            this.style.background = 'rgba(59,130,246,0.08)';
+          "
+          onmouseout="
+            this.style.color = '#64748b';
+            this.style.borderColor = '#2a3a50';
+            this.style.background = '#0f1923';
+          "
+          >← Kembali ke Aionyx Hub</a
+        >
       </div>
     </div>
 
-    <!-- ===== PREVIEW ===== -->
     <div id="preview-area">
       <div id="lembar" class="a4-paper">
         <div class="kop-sekolah">
@@ -1319,10 +1408,10 @@ input[type="number"].input-error {
             <div class="baris1" id="kop-baris1">
               PENILAIAN AKHIR SATUAN PENDIDIKAN
             </div>
-            <div class="baris2" id="kop-baris2">SEMESTER GENAP TAHUN PELAJARAN 2025/2026</div>
-            <div class="baris3" id="kop-baris3">
-              NAMA SEKOLAH / MADRASAH
+            <div class="baris2" id="kop-baris2">
+              SEMESTER GENAP TAHUN PELAJARAN 2025/2026
             </div>
+            <div class="baris3" id="kop-baris3">NAMA SEKOLAH / MADRASAH</div>
           </div>
         </div>
 
@@ -1339,7 +1428,14 @@ input[type="number"].input-error {
               >Mata Pelajaran</span
             >
             <span style="margin: 0 2px">:</span>
-            <span id="mapel-display" style="min-width:240px; border-bottom:1px dotted #000; font-weight:normal;"></span>
+            <span
+              id="mapel-display"
+              style="
+                min-width: 240px;
+                border-bottom: 1px dotted #000;
+                font-weight: normal;
+              "
+            ></span>
           </div>
           <div class="identitas-row">
             <span class="identitas-label" style="min-width: 80px">Kelas</span>
@@ -1378,7 +1474,11 @@ input[type="number"].input-error {
           <div class="essay-columns-wrapper" id="essay-columns-wrapper"></div>
         </div>
 
-        <div id="area-kotak-bawah" class="kotak-bawah-wrapper" style="display:none;">
+        <div
+          id="area-kotak-bawah"
+          class="kotak-bawah-wrapper"
+          style="display: none"
+        >
           <div class="kotak-nilai-item">
             <div class="kotak-nilai-col">
               <div class="kotak-nilai-label">Nilai</div>
@@ -1392,34 +1492,32 @@ input[type="number"].input-error {
         </div>
       </div>
     </div>
-    </div>
     <script>
-      // Cek apakah sesi ini sudah unlock WM sebelumnya
-const wmUnlocked = sessionStorage.getItem("wm_unlocked");
+      const wmUnlocked = sessionStorage.getItem("wm_unlocked");
 
-const wm = document.createElement('div');
-wm.id = 'watermark';
-wm.textContent = 'LJ BY ZECH';
-wm.style.cssText = `
+      const wm = document.createElement("div");
+      wm.id = "watermark";
+      wm.textContent = "LJ BY ZECH";
+      wm.style.cssText = `
   position:fixed; inset:0; pointer-events:none; z-index:1;
   display:flex; align-items:center; justify-content:center;
   opacity:0.06; font-size:80px; font-weight:900; color:#000;
   transform:rotate(-30deg); user-select:none;
   font-family:'Poppins',sans-serif; white-space:nowrap;`;
-document.body.appendChild(wm);
+      document.body.appendChild(wm);
 
-if (wmUnlocked === "true") {
-  wm.style.display = "none";
-}
+      if (wmUnlocked === "true") {
+        wm.style.display = "none";
+      }
 
-const popup = document.createElement("div");
-popup.style.cssText = `
+      const popup = document.createElement("div");
+      popup.style.cssText = `
   position: fixed; inset: 0; background: rgba(0,0,0,0.7);
   display: flex; align-items: center; justify-content: center;
   z-index: 9999; font-family: 'Poppins', sans-serif;
   animation: fadeIn 0.3s ease;
 `;
-popup.innerHTML = `
+      popup.innerHTML = `
   <style>
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -1462,25 +1560,28 @@ popup.innerHTML = `
       color: white; border: none; border-radius: 8px;
       padding: 10px 28px; font-size: 13px; font-weight: 600;
       cursor: pointer; font-family: 'Poppins', sans-serif; letter-spacing: 0.5px;
-    ">Mulai Gunakan ✨</button>
+    ">Mulai Gunakan</button>
   </div>
 `;
-document.body.appendChild(popup);
+      document.body.appendChild(popup);
 
-document.getElementById("tutupPopup").addEventListener("click", () => {
-  const kode = document.getElementById("inputWm").value;
-  const secretPattern = [90, 69, 67, 72, 71, 51, 48, 72, 90]; 
-  const isValid = kode.length === secretPattern.length && 
-                  kode.split('').every((char, i) => char.charCodeAt(0) === secretPattern[i]);
+      document.getElementById("tutupPopup").addEventListener("click", () => {
+        const kode = document.getElementById("inputWm").value;
+        const secretPattern = [90, 69, 67, 72, 71, 51, 48, 72, 90];
+        const isValid =
+          kode.length === secretPattern.length &&
+          kode
+            .split("")
+            .every((char, i) => char.charCodeAt(0) === secretPattern[i]);
 
-  if (isValid) {  
-    wm.style.display = "none";
-    sessionStorage.setItem("wm_unlocked", "true");
-  }
-  popup.style.animation = "fadeIn 0.2s ease reverse";
-  setTimeout(() => popup.remove(), 200);
-});
-      const defaultLogo = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='38' fill='%23f0f0f0' stroke='%23999' stroke-width='2'/%3E%3Ccircle cx='40' cy='30' r='14' fill='%23aaa'/%3E%3Cellipse cx='40' cy='62' rx='20' ry='12' fill='%23aaa'/%3E%3C/svg%3E`;
+        if (isValid) {
+          wm.style.display = "none";
+          sessionStorage.setItem("wm_unlocked", "true");
+        }
+        popup.style.animation = "fadeIn 0.2s ease reverse";
+        setTimeout(() => popup.remove(), 200);
+      });
+      const defaultLogo = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA4MCA4MCc+PGNpcmNsZSBjeD0nNDAnIGN5PSc0MCcgcj0nMzgnIGZpbGw9JyNmMGYwZjAnIHN0cm9rZT0nIzk5OScgc3Ryb2tlLXdpZHRoPScyJy8+PGNpcmNsZSBjeD0nNDAnIGN5PSczMCcgcj0nMTQnIGZpbGw9JyNhYWEnLz48ZWxsaXBzZSBjeD0nNDAnIGN5PSc2Micgcng9JzIwJyByeT0nMTInIGZpbGw9JyNhYWEnLz48L3N2Zz4=`;
       document.getElementById("kop-logo").src = defaultLogo;
 
       document
@@ -1565,9 +1666,13 @@ document.getElementById("tutupPopup").addEventListener("click", () => {
           if (colIdx >= numCols) break;
           const item = document.createElement("div");
           item.className = "isian-item";
-          const pilihanNomorIsian = document.getElementById('nomor-isian')?.value || 'lanjut';
-          const nomorIsian = (pilihanNomorIsian === 'lanjut' && chk('aktif-pg')) ? iv('jml-pg') + i : i;
-item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="isian-garis"></span>`;
+          const pilihanNomorIsian =
+            document.getElementById("nomor-isian")?.value || "lanjut";
+          const nomorIsian =
+            pilihanNomorIsian === "lanjut" && chk("aktif-pg")
+              ? iv("jml-pg") + i
+              : i;
+          item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="isian-garis"></span>`;
           cols[colIdx].appendChild(item);
         }
       }
@@ -1595,7 +1700,17 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
           item.className = "essay-item";
           item.innerHTML = `
   <div class="essay-nomor-row" style="display:flex; align-items:center; gap:6px;">
-    <span class="essay-nomor" style="flex-shrink:0; font-weight:600;">${(() => { const p = document.getElementById('nomor-essay')?.value || 'lanjut'; return p === 'lanjut' ? (chk('aktif-pg') ? iv('jml-pg') : 0) + (chk('aktif-isian') ? iv('jml-isian') : 0) + i : i; })()}.</span>
+    <span class="essay-nomor" style="flex-shrink:0; font-weight:600;">${(() => {
+      const p = document.getElementById("nomor-essay")?.value || "lanjut";
+      if (p === "lanjut") {
+        const basePG = chk("aktif-pg") ? iv("jml-pg") : 0;
+        const baseIsian = chk("aktif-isian") ? iv("jml-isian") : 0;
+        const isianLanjut =
+          document.getElementById("nomor-isian")?.value || "lanjut";
+        return (isianLanjut === "lanjut" ? basePG : 0) + baseIsian + i;
+      }
+      return i;
+    })()}.</span>
     <div class="essay-line" style="flex:1; border-bottom:1.5px solid #000; height:1.1em;"></div>
   </div>
   <div class="essay-lines" style="padding-left:25px;">
@@ -1619,14 +1734,13 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
           v("baris2") || "SEMESTER GENAP TAHUN PELAJARAN 2025/2026";
         document.getElementById("kop-baris3").textContent =
           v("baris3") || "NAMA SEKOLAH / MADRASAH";
-        document.getElementById("kelas-display").textContent =
-          v("kelasInput");
-        document.getElementById("mapel-display").textContent = 
-          v("mapelInput");
+        document.getElementById("kelas-display").textContent = v("kelasInput");
+        document.getElementById("mapel-display").textContent = v("mapelInput");
         document.getElementById("lembar").className =
           v("ukuranKertas") === "f4" ? "f4-paper" : "a4-paper";
         document.documentElement.style.setProperty(
-          '--print-size', v("ukuranKertas") === "f4" ? "215mm 330mm" : "A4"
+          "--print-size",
+          v("ukuranKertas") === "f4" ? "215mm 330mm" : "A4",
         );
         const isF4 = v("ukuranKertas") === "f4";
         const kotakToggle = document.getElementById("aktif-kotak-bawah");
@@ -1668,10 +1782,13 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
         document.getElementById(id).addEventListener("change", updateAll),
       );
 
-      document.getElementById("aktif-kotak-bawah").addEventListener("change", function() {
-        const isF4 = v("ukuranKertas") === "f4";
-        document.getElementById("area-kotak-bawah").style.display = (this.checked && isF4) ? "flex" : "none";
-      });
+      document
+        .getElementById("aktif-kotak-bawah")
+        .addEventListener("change", function () {
+          const isF4 = v("ukuranKertas") === "f4";
+          document.getElementById("area-kotak-bawah").style.display =
+            this.checked && isF4 ? "flex" : "none";
+        });
 
       ["nomor-isian", "nomor-essay"].forEach((id) => {
         const el = document.getElementById(id);
@@ -1680,102 +1797,93 @@ item.innerHTML = `<span class="isian-nomor">${nomorIsian}.</span><span class="is
       function validateMax(el, max) {
         if (parseInt(el.value) > max) {
           el.value = max;
-          el.classList.add('input-error');
-          setTimeout(() => el.classList.remove('input-error'), 1500);
+          el.classList.add("input-error");
+          setTimeout(() => el.classList.remove("input-error"), 1500);
         } else {
-          el.classList.remove('input-error');
+          el.classList.remove("input-error");
         }
         updateAll();
       }
       updateAll();
-const firebaseConfig = { databaseURL: "https://aionyx-hub-default-rtdb.asia-southeast1.firebasedatabase.app" };
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-db.ref("total_views").transaction(function(current) {
-  return (current || 0) + 1;
-});
-const onlineRef = db.ref("online");
-const myRef = onlineRef.push(true);
-myRef.onDisconnect().remove();
-onlineRef.on("value", snap => {
-  const count = snap.numChildren();
-  document.getElementById("online-count").textContent = `● ${count} online`;
-});
-
-      window.addEventListener('beforeunload', function(e) {
-        e.preventDefault();
-        e.returnValue = '';
-        return '';
+      const firebaseConfig = {
+        databaseURL:
+          "https://aionyx-hub-default-rtdb.asia-southeast1.firebasedatabase.app",
+      };
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database();
+      db.ref("total_views").transaction(function (current) {
+        return (current || 0) + 1;
+      });
+      const onlineRef = db.ref("online");
+      const myRef = onlineRef.push(true);
+      myRef.onDisconnect().remove();
+      onlineRef.on("value", (snap) => {
+        const count = snap.numChildren();
+        document.getElementById("online-count").textContent =
+          `● ${count} online`;
       });
 
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'F5') {
-          e.preventDefault();
-          e.stopPropagation();
-          return false;
-        }
-        if (e.ctrlKey && (e.key === 'r' || e.key === 'R')) {
-          e.preventDefault();
-          e.stopPropagation();
-          return false;
-        }
-      }, true);
+      window.addEventListener("beforeunload", function (e) {
+        e.preventDefault();
+        e.returnValue = "";
+        return "";
+      });
 
-      document.body.style.overscrollBehavior = 'none';
-      document.documentElement.style.overscrollBehavior = 'none';
+      document.addEventListener(
+        "keydown",
+        function (e) {
+          if (e.key === "F5") {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+          if (e.ctrlKey && (e.key === "r" || e.key === "R")) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        },
+        true,
+      );
+
+      document.body.style.overscrollBehavior = "none";
+      document.documentElement.style.overscrollBehavior = "none";
       let touchStartX = 0;
       let touchStartY = 0;
       let touchEndX = 0;
       let touchEndY = 0;
       let isTouchInToggleArea = false;
 
-      document.addEventListener('touchstart', function(e) {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-        
-        const touchElement = e.target;
-        const floatingToggle = document.getElementById("floating-toggle");
-        const toggleSidebarBtn = document.getElementById("toggleSidebarBtn");
-        
-        isTouchInToggleArea = 
-          (floatingToggle && floatingToggle.contains(touchElement)) ||
-          (toggleSidebarBtn && toggleSidebarBtn.contains(touchElement)) ||
-          (e.touches[0].clientX < 70 && e.touches[0].clientY < 70);
-      }, { passive: true });
+      document.addEventListener(
+        "touchstart",
+        function (e) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
 
-      document.addEventListener('touchmove', function(e) {
-        const panelBody = document.querySelector('.panel-body');
-        const previewArea = document.getElementById('preview-area');
-        const target = e.target;
-        if (previewArea && previewArea.contains(target)) {
-          e.stopPropagation();
-          return;
-        }
-        if (panelBody && panelBody.contains(target)) {
-          const atTop = panelBody.scrollTop <= 0;
-          const atBottom = panelBody.scrollTop + panelBody.clientHeight >= panelBody.scrollHeight - 1;
-          const goingDown = e.touches[0].clientY < touchStartY;
-          const goingUp = e.touches[0].clientY > touchStartY;
+          const touchElement = e.target;
+          const floatingToggle = document.getElementById("floating-toggle");
+          const toggleSidebarBtn = document.getElementById("toggleSidebarBtn");
 
-          if ((atTop && goingUp) || (atBottom && goingDown)) {
-            e.preventDefault();
-          }
-          return;
-        }
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        if (scrollTop === 0 && e.touches[0].clientY > touchStartY) {
-          e.preventDefault();
-        }
-      }, { passive: false });
+          isTouchInToggleArea =
+            (floatingToggle && floatingToggle.contains(touchElement)) ||
+            (toggleSidebarBtn && toggleSidebarBtn.contains(touchElement)) ||
+            (e.touches[0].clientX < 70 && e.touches[0].clientY < 70);
+        },
+        { passive: true },
+      );
 
-      document.addEventListener('touchend', function(e) {
-        if (!isTouchInToggleArea) return;
-        
-        touchEndX = e.changedTouches[0].clientX;
-        touchEndY = e.changedTouches[0].clientY;
-        handleSwipe();
-        isTouchInToggleArea = false;
-      }, false);
+      document.addEventListener(
+        "touchend",
+        function (e) {
+          if (!isTouchInToggleArea) return;
+
+          touchEndX = e.changedTouches[0].clientX;
+          touchEndY = e.changedTouches[0].clientY;
+          handleSwipe();
+          isTouchInToggleArea = false;
+        },
+        false,
+      );
 
       function handleSwipe() {
         const panel = document.getElementById("panel");
@@ -1786,42 +1894,49 @@ onlineRef.on("value", snap => {
         const diffY = touchEndY - touchStartY;
         if (diffX > 80 && Math.abs(diffY) < 50 && isHidden) {
           setSidebarState(false);
-        }
-        else if (diffX < -80 && Math.abs(diffY) < 50 && !isHidden) {
+        } else if (diffX < -80 && Math.abs(diffY) < 50 && !isHidden) {
           setSidebarState(true);
         }
       }
       // LOGIKA SEMBUNYIKAN / TAMPILKAN SIDEBAR
       function setSidebarState(hidden) {
-  const panel = document.getElementById("panel");
-  const floatingToggle = document.getElementById("floating-toggle");
-  const floatingPrint = document.getElementById("floating-print");
+        const panel = document.getElementById("panel");
+        const floatingToggle = document.getElementById("floating-toggle");
+        const floatingPrint = document.getElementById("floating-print");
 
-  panel.classList.toggle("sidebar-hidden", hidden);
-  const label = document.querySelector(".sidebar-collapsed-label");
-  if (label) label.classList.toggle("visible", hidden);
-  const btnSvg = document.querySelector("#toggleSidebarBtn svg");
-  if (btnSvg) btnSvg.style.transform = hidden ? "rotate(90deg)" : "rotate(0deg)";
-  const isMobile = window.innerWidth <= 768;
-  if (floatingToggle) {
-    floatingToggle.style.display = (hidden && isMobile) ? "flex" : "none";
-    floatingToggle.onclick = function() { setSidebarState(false); };
-  }
-}
-document.getElementById("toggleSidebarBtn").addEventListener("click", function () {
-  const panel = document.getElementById("panel");
-  const isHidden = !panel.classList.contains("sidebar-hidden");
-  setSidebarState(isHidden);
-});
+        panel.classList.toggle("sidebar-hidden", hidden);
+        const label = document.querySelector(".sidebar-collapsed-label");
+        if (label) label.classList.toggle("visible", hidden);
+        const btnSvg = document.querySelector("#toggleSidebarBtn svg");
+        if (btnSvg)
+          btnSvg.style.transform = hidden ? "rotate(90deg)" : "rotate(0deg)";
+        const isMobile = window.innerWidth <= 768;
+        if (floatingToggle) {
+          floatingToggle.style.display = hidden && isMobile ? "flex" : "none";
+          floatingToggle.onclick = function () {
+            setSidebarState(false);
+          };
+        }
+        if (floatingPrint && isMobile) {
+          floatingPrint.style.display = hidden ? "inline-flex" : "none";
+        }
+      }
+      document
+        .getElementById("toggleSidebarBtn")
+        .addEventListener("click", function () {
+          const panel = document.getElementById("panel");
+          const isHidden = !panel.classList.contains("sidebar-hidden");
+          setSidebarState(isHidden);
+        });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const floatingToggle = document.getElementById("floating-toggle");
-  if (floatingToggle) {
-    floatingToggle.addEventListener("click", function () {
-      setSidebarState(false);
-    });
-  }
-});
+      document.addEventListener("DOMContentLoaded", function () {
+        const floatingToggle = document.getElementById("floating-toggle");
+        if (floatingToggle) {
+          floatingToggle.addEventListener("click", function () {
+            setSidebarState(false);
+          });
+        }
+      });
       // BLOKIR INSPECT ELEMENT
       document.addEventListener("contextmenu", function (e) {
         e.preventDefault();
@@ -1870,19 +1985,20 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         true,
       );
-      document.addEventListener('keyup', function(e) {
-  if (e.key === 'PrintScreen') {
-    navigator.clipboard.writeText('').catch(()=>{});
-  }
-});
+      document.addEventListener("keyup", function (e) {
+        if (e.key === "PrintScreen") {
+          navigator.clipboard.writeText("").catch(() => {});
+        }
+      });
       // Deteksi DevTools
-      setInterval(function() {
-        const threshold = 160;
-        const isDevToolsOpen = (window.outerWidth - window.innerWidth > threshold || 
-                                window.outerHeight - window.innerHeight > threshold);
-        
+      setInterval(function () {
+        const threshold = 250;
+        const isDevToolsOpen =
+          window.outerWidth - window.innerWidth > threshold ||
+          window.outerHeight - window.innerHeight > threshold;
+
         if (isDevToolsOpen) {
-          sessionStorage.removeItem('wm_unlocked');
+          sessionStorage.removeItem("wm_unlocked");
           document.body.innerHTML = `
             <div style="color:#ef4444;display:flex;flex-direction:column;
             align-items:center;justify-content:center;height:100vh;
@@ -1895,7 +2011,7 @@ document.addEventListener("DOMContentLoaded", function () {
               color:white;border:none;border-radius:8px;cursor:pointer;
               font-size:14px;font-weight:600;">🔄 Muat Ulang</button>
             </div>`;
-          
+
           (function freeze() {
             createFunction();
           })();
@@ -1903,217 +2019,906 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 500);
 
       function createFunction() {
-        const func = function() {
+        const func = function () {
           eval("debugger");
         };
         func();
       }
-
     </script>
-    <!-- Settings button -->
-<button id="settings-btn" title="Settings">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="3"/>
-    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-  </svg>
-</button>
+    <button id="settings-btn" title="Settings">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="3" />
+        <path
+          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+        />
+      </svg>
+    </button>
 
-<!-- Settings dropdown -->
-<div id="settings-dropdown">
-  <div class="settings-menu-item" id="menu-bahasa">
-    <span>🌐 Bahasa</span>
-    <span class="settings-arrow">›</span>
-    <div class="settings-submenu" id="submenu-bahasa">
-      <button class="lang-option active" id="lang-id" onclick="setLang('id')">
-        🇮🇩 ID
-      </button>
-      <button class="lang-option" id="lang-en" onclick="setLang('en')">
-        🇺🇸 EN
-      </button>
+    <div id="settings-dropdown">
+      <div class="settings-menu-item" id="menu-bahasa">
+        <span>🌐 Bahasa</span>
+        <span class="settings-arrow">›</span>
+        <div class="settings-submenu" id="submenu-bahasa">
+          <button
+            class="lang-option active"
+            id="lang-id"
+            onclick="setLang('id', event)"
+          >
+            🇮🇩 ID
+          </button>
+          <button
+            class="lang-option"
+            id="lang-en"
+            onclick="setLang('en', event)"
+          >
+            🇺🇸 EN
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-    <!-- Floating toggle button -->
-<button id="floating-toggle">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="3" y1="12" x2="21" y2="12"></line>
-    <line x1="3" y1="6" x2="21" y2="6"></line>
-    <line x1="3" y1="18" x2="21" y2="18"></line>
-  </svg>
-</button>
+    <button id="floating-toggle">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
 
-<!-- Floating print button -->
-<button id="floating-print" onclick="window.print()">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-    <polyline points="6 9 6 2 18 2 18 9"/>
-    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-    <rect x="6" y="14" width="12" height="8"/>
-  </svg>
-  Cetak Lembar Jawaban
-</button>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js');
-    }
-  // ===== SETTINGS BUTTON =====
-const settingsBtn = document.getElementById('settings-btn');
-const settingsDropdown = document.getElementById('settings-dropdown');
+    <button id="floating-print" onclick="openPrintModal()">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+      >
+        <polyline points="6 9 6 2 18 2 18 9" />
+        <path
+          d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+        />
+        <rect x="6" y="14" width="12" height="8" />
+      </svg>
+      Cetak Lembar Jawaban
+    </button>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js");
+      }
+      // ===== SETTINGS BUTTON =====
+      const settingsBtn = document.getElementById("settings-btn");
+      const settingsDropdown = document.getElementById("settings-dropdown");
 
-settingsBtn.addEventListener('click', function(e) {
-  e.stopPropagation();
-  const isOpen = settingsDropdown.classList.contains('open');
-  settingsDropdown.classList.toggle('open', !isOpen);
-  settingsBtn.classList.toggle('open', !isOpen);
-  // Tutup submenu kalau dropdown ditutup
-  if (isOpen) {
-    document.getElementById('menu-bahasa').classList.remove('open');
-  }
-});
+      settingsBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const isOpen = settingsDropdown.classList.contains("open");
+        settingsDropdown.classList.toggle("open", !isOpen);
+        settingsBtn.classList.toggle("open", !isOpen);
+        // Tutup submenu kalau dropdown ditutup
+        if (isOpen) {
+          document.getElementById("menu-bahasa").classList.remove("open");
+        }
+      });
 
-document.getElementById('menu-bahasa').addEventListener('click', function(e) {
-  e.stopPropagation();
-  this.classList.toggle('open');
-});
+      document
+        .getElementById("menu-bahasa")
+        .addEventListener("click", function (e) {
+          e.stopPropagation();
+          this.classList.toggle("open");
+        });
 
-document.addEventListener('click', function(e) {
-  if (!settingsBtn.contains(e.target) && !settingsDropdown.contains(e.target)) {
-    settingsDropdown.classList.remove('open');
-    settingsBtn.classList.remove('open');
-    document.getElementById('menu-bahasa').classList.remove('open');
-  }
-});
+      document.addEventListener("click", function (e) {
+        if (
+          !settingsBtn.contains(e.target) &&
+          !settingsDropdown.contains(e.target)
+        ) {
+          settingsDropdown.classList.remove("open");
+          settingsBtn.classList.remove("open");
+          document.getElementById("menu-bahasa").classList.remove("open");
+        }
+      });
 
-// ===== SISTEM BAHASA =====
-const translations = {
-  id: {
-    toolTitle: "⚙ TOOL ADJUSTMENT",
-    subTitle: "Generator Lembar Jawaban by Zech",
-    kopSekolah: "Kop Sekolah",
-    logoLabel: "Logo Sekolah",
-    logoUpload: "📁 Klik untuk upload logo",
-    baris1Label: "Teks Baris 1",
-    baris2Label: "Teks Baris 2",
-    baris3Label: "Teks Baris 3",
-    halamanSiswa: "Halaman & Siswa",
-    ukuranKertas: "Ukuran Kertas",
-    kelasLabel: "Kelas",
-    mapelLabel: "Mata Pelajaran",
-    opsiTambahan: "Opsi Tambahan",
-    kotakNilai: "Kotak Nilai & Paraf",
-    kotakNote: "* Opsi hanya tersedia untuk kertas F4",
-    konfigSoal: "Konfigurasi Soal",
-    pgTitle: "I. Pilihan Ganda",
-    isianTitle: "II. Isian",
-    essayTitle: "III. Essay",
-    jmlSoal: "Jumlah Soal",
-    opsiJawaban: "Opsi Jawaban",
-    penomoran: "Penomoran",
-    lanjutPG: "Lanjut dari PG",
-    mulai1: "Mulai dari 1",
-    lanjutPGIsian: "Lanjut dari PG+Isian",
-    cetakBtn: "Cetak Lembar Jawaban",
-    judulLembar: "LEMBAR JAWAB",
-    namaLabel: "Nama",
-    mapelDisplay: "Mata Pelajaran",
-    kelasDisplay: "Kelas",
-    hariTanggal: "Hari / Tanggal",
-    nilaiLabel: "Nilai",
-    parafLabel: "Paraf Orang Tua",
-  },
-  en: {
-    toolTitle: "⚙ TOOL ADJUSTMENT",
-    subTitle: "Answer Sheet Generator by Zech",
-    kopSekolah: "School Header",
-    logoLabel: "School Logo",
-    logoUpload: "📁 Click to upload logo",
-    baris1Label: "Line 1 Text",
-    baris2Label: "Line 2 Text",
-    baris3Label: "Line 3 Text",
-    halamanSiswa: "Page & Student",
-    ukuranKertas: "Paper Size",
-    kelasLabel: "Class",
-    mapelLabel: "Subject",
-    opsiTambahan: "Extra Options",
-    kotakNilai: "Score & Signature Box",
-    kotakNote: "* Only available for F4 paper",
-    konfigSoal: "Question Config",
-    pgTitle: "I. Multiple Choice",
-    isianTitle: "II. Fill in the Blank",
-    essayTitle: "III. Essay",
-    jmlSoal: "Total Questions",
-    opsiJawaban: "Answer Options",
-    penomoran: "Numbering",
-    lanjutPG: "Continue from MC",
-    mulai1: "Start from 1",
-    lanjutPGIsian: "Continue from MC+Fill",
-    cetakBtn: "Print Answer Sheet",
-    judulLembar: "ANSWER SHEET",
-    namaLabel: "Name",
-    mapelDisplay: "Subject",
-    kelasDisplay: "Class",
-    hariTanggal: "Day / Date",
-    nilaiLabel: "Score",
-    parafLabel: "Parent Sign",
-  }
-};
+      // ===== SISTEM BAHASA =====
+      const translations = {
+        id: {
+          langMenu: "🌐 Bahasa",
+          toolTitle: "⚙ TOOL ADJUSTMENT",
+          subTitle: "Generator Lembar Jawaban by Zech",
+          kopSekolah: "Kop Sekolah",
+          logoLabel: "Logo Sekolah",
+          logoUpload: "📁 Klik untuk upload logo",
+          baris1Label: "Teks Baris 1",
+          baris2Label: "Teks Baris 2",
+          baris3Label: "Teks Baris 3",
+          halamanSiswa: "Halaman & Siswa",
+          ukuranKertas: "Ukuran Kertas",
+          kelasLabel: "Kelas",
+          mapelLabel: "Mata Pelajaran",
+          opsiTambahan: "Opsi Tambahan",
+          kotakNilai: "Kotak Nilai & Paraf",
+          kotakNote: "* Opsi hanya tersedia untuk kertas F4",
+          konfigSoal: "Konfigurasi Soal",
+          pgTitle: "I. Pilihan Ganda",
+          isianTitle: "II. Isian",
+          essayTitle: "III. Essay",
+          jmlSoal: "Jumlah Soal",
+          opsiJawaban: "Opsi Jawaban",
+          penomoran: "Penomoran",
+          lanjutPG: "Lanjut dari PG",
+          mulai1: "Mulai dari 1",
+          lanjutPGIsian: "Lanjut dari PG+Isian",
+          cetakBtn: "Cetak Lembar Jawaban",
+          judulLembar: "LEMBAR JAWAB",
+          namaLabel: "Nama",
+          mapelDisplay: "Mata Pelajaran",
+          kelasDisplay: "Kelas",
+          hariTanggal: "Hari / Tanggal",
+          nilaiLabel: "Nilai",
+          parafLabel: "Paraf Orang Tua",
+          kembaliHub: "← Kembali ke Aionyx Hub",
+        },
+        en: {
+          langMenu: "🌐 Language",
+          toolTitle: "⚙ TOOL ADJUSTMENT",
+          subTitle: "Answer Sheet Generator by Zech",
+          kopSekolah: "School Header",
+          logoLabel: "School Logo",
+          logoUpload: "📁 Click to upload logo",
+          baris1Label: "Line 1 Text",
+          baris2Label: "Line 2 Text",
+          baris3Label: "Line 3 Text",
+          halamanSiswa: "Page & Student",
+          ukuranKertas: "Paper Size",
+          kelasLabel: "Class",
+          mapelLabel: "Subject",
+          opsiTambahan: "Extra Options",
+          kotakNilai: "Score & Signature Box",
+          kotakNote: "* Only available for F4 paper",
+          konfigSoal: "Question Config",
+          pgTitle: "I. Multiple Choice",
+          isianTitle: "II. Fill in the Blank",
+          essayTitle: "III. Essay",
+          jmlSoal: "Total Questions",
+          opsiJawaban: "Answer Options",
+          penomoran: "Numbering",
+          lanjutPG: "Continue from MC",
+          mulai1: "Start from 1",
+          lanjutPGIsian: "Continue from MC+Fill",
+          cetakBtn: "Print Answer Sheet",
+          judulLembar: "ANSWER SHEET",
+          namaLabel: "Name",
+          mapelDisplay: "Subject",
+          kelasDisplay: "Class",
+          hariTanggal: "Day / Date",
+          nilaiLabel: "Score",
+          parafLabel: "Parent Sign",
+          kembaliHub: "← Back to Aionyx Hub",
+        },
+      };
 
-function setLang(code) {
-  const t = translations[code];
-  document.querySelector('.panel-header h1').childNodes[0].textContent = t.toolTitle + ' ';
-  document.querySelector('.panel-header-text p').childNodes[0].textContent = t.subTitle;
-  const sectionTitles = document.querySelectorAll('.panel-section-title');
-  sectionTitles[0].innerHTML = sectionTitles[0].innerHTML.replace(/.*/, t.kopSekolah);
-  sectionTitles[1].innerHTML = sectionTitles[1].innerHTML.replace(/.*/, t.halamanSiswa);
-  sectionTitles[2].innerHTML = sectionTitles[2].innerHTML.replace(/.*/, t.opsiTambahan);
-  sectionTitles[3].innerHTML = sectionTitles[3].innerHTML.replace(/.*/, t.konfigSoal);
-  const labels = document.querySelectorAll('.form-group label');
-  labels[0].textContent = t.logoLabel;
-  labels[1].textContent = t.baris1Label;
-  labels[2].textContent = t.baris2Label;
-  labels[3].textContent = t.baris3Label;
-  labels[4].textContent = t.ukuranKertas;
-  labels[5].textContent = t.kelasLabel;
-  labels[6].textContent = t.mapelLabel;
-  labels[7].textContent = t.jmlSoal;
-  labels[8].textContent = t.opsiJawaban;
-  labels[9].textContent = t.jmlSoal;
-  labels[10].textContent = t.penomoran;
-  labels[11].textContent = t.jmlSoal;
-  labels[12].textContent = t.penomoran;
-  const uploadText = document.getElementById('logoUploadText');
-  if (!uploadText.querySelector('small') || uploadText.querySelector('small').style.color !== 'rgb(16, 185, 129)') {
-    uploadText.innerHTML = `${t.logoUpload}<br><small style="font-size:14px;opacity:0.6">PNG, JPG, SVG</small>`;
-  }
-  document.querySelector('#nomor-isian option[value="lanjut"]').textContent = t.lanjutPG;
-  document.querySelector('#nomor-isian option[value="mulai1"]').textContent = t.mulai1;
-  document.querySelector('#nomor-essay option[value="lanjut"]').textContent = t.lanjutPGIsian;
-  document.querySelector('#nomor-essay option[value="mulai1"]').textContent = t.mulai1;
-  document.querySelector('#card-kotak-bawah .section-card-header span').textContent = t.kotakNilai;
-  document.querySelector('#card-pg .section-card-header span').textContent = t.pgTitle;
-  document.querySelector('#card-isian .section-card-header span').textContent = t.isianTitle;
-  document.querySelector('#card-essay .section-card-header span').textContent = t.essayTitle;
-  document.querySelector('#card-kotak-bawah div[style*="font-size:10px"]').textContent = t.kotakNote;
-  document.querySelector('#floating-print').childNodes[1]
-    ? (document.querySelector('#floating-print').lastChild.textContent = ' ' + t.cetakBtn)
-    : null;
-  document.querySelector('.judul-box').textContent = t.judulLembar;
-  const idLabels = document.querySelectorAll('.identitas-label');
-  idLabels[0].textContent = t.namaLabel;
-  idLabels[1].textContent = t.mapelDisplay;
-  idLabels[2].textContent = t.kelasDisplay;
-  idLabels[3].textContent = t.hariTanggal;
-  const kotakLabels = document.querySelectorAll('.kotak-nilai-label');
-  if (kotakLabels[0]) kotakLabels[0].textContent = t.nilaiLabel;
-  if (kotakLabels[1]) kotakLabels[1].textContent = t.parafLabel;
-  const bagianTitles = document.querySelectorAll('.bagian-title');
-  if (bagianTitles[0]) bagianTitles[0].textContent = t.pgTitle;
-  if (bagianTitles[1]) bagianTitles[1].textContent = t.isianTitle;
-  if (bagianTitles[2]) bagianTitles[2].textContent = t.essayTitle;
-  document.getElementById('lang-id').classList.toggle('active', code === 'id');
-  document.getElementById('lang-en').classList.toggle('active', code === 'en');
-  settingsDropdown.classList.remove('open');
-  settingsBtn.classList.remove('open');
-}
-  </script>
+      function setLang(code, event) {
+        if (event) event.stopPropagation();
+        const t = translations[code];
+        document.querySelector(".panel-header h1").childNodes[0].textContent =
+          t.toolTitle + " ";
+        document.querySelector(
+          ".panel-header-text p",
+        ).childNodes[0].textContent = t.subTitle;
+        const sectionTitles = document.querySelectorAll(".panel-section-title");
+        sectionTitles[0].innerHTML = sectionTitles[0].innerHTML.replace(
+          /.*/,
+          t.kopSekolah,
+        );
+        sectionTitles[1].innerHTML = sectionTitles[1].innerHTML.replace(
+          /.*/,
+          t.halamanSiswa,
+        );
+        sectionTitles[2].innerHTML = sectionTitles[2].innerHTML.replace(
+          /.*/,
+          t.opsiTambahan,
+        );
+        sectionTitles[3].innerHTML = sectionTitles[3].innerHTML.replace(
+          /.*/,
+          t.konfigSoal,
+        );
+        const labels = document.querySelectorAll(".form-group label");
+        labels[0].textContent = t.logoLabel;
+        labels[1].textContent = t.baris1Label;
+        labels[2].textContent = t.baris2Label;
+        labels[3].textContent = t.baris3Label;
+        labels[4].textContent = t.ukuranKertas;
+        labels[5].textContent = t.kelasLabel;
+        labels[6].textContent = t.mapelLabel;
+        labels[7].textContent = t.jmlSoal;
+        labels[8].textContent = t.opsiJawaban;
+        labels[9].textContent = t.jmlSoal;
+        labels[10].textContent = t.penomoran;
+        labels[11].textContent = t.jmlSoal;
+        labels[12].textContent = t.penomoran;
+        const uploadText = document.getElementById("logoUploadText");
+        if (
+          !uploadText.querySelector("small") ||
+          uploadText.querySelector("small").style.color !== "rgb(16, 185, 129)"
+        ) {
+          uploadText.innerHTML = `${t.logoUpload}<br><small style="font-size:14px;opacity:0.6">PNG, JPG, SVG</small>`;
+        } else if (
+          uploadText.innerHTML.includes("terupload") ||
+          uploadText.innerHTML.includes("uploaded")
+        ) {
+          uploadText.innerHTML = `<small style="font-size:10px;color:#10b981">✓ ${code === "id" ? "Logo terupload" : "Logo uploaded"}</small>`;
+        }
+        document.querySelector(
+          '#nomor-isian option[value="lanjut"]',
+        ).textContent = t.lanjutPG;
+        document.querySelector(
+          '#nomor-isian option[value="mulai1"]',
+        ).textContent = t.mulai1;
+        document.querySelector(
+          '#nomor-essay option[value="lanjut"]',
+        ).textContent = t.lanjutPGIsian;
+        document.querySelector(
+          '#nomor-essay option[value="mulai1"]',
+        ).textContent = t.mulai1;
+        document.querySelector(
+          "#card-kotak-bawah .section-card-header span",
+        ).textContent = t.kotakNilai;
+        document.querySelector(
+          "#card-pg .section-card-header span",
+        ).textContent = t.pgTitle;
+        document.querySelector(
+          "#card-isian .section-card-header span",
+        ).textContent = t.isianTitle;
+        document.querySelector(
+          "#card-essay .section-card-header span",
+        ).textContent = t.essayTitle;
+        document.querySelector(
+          '#card-kotak-bawah div[style*="font-size"]',
+        ).textContent = t.kotakNote;
+        document.querySelector("#floating-print").childNodes[1]
+          ? (document.querySelector("#floating-print").lastChild.textContent =
+              " " + t.cetakBtn)
+          : null;
+        document.querySelector(".judul-box").textContent = t.judulLembar;
+        const idLabels = document.querySelectorAll(".identitas-label");
+        idLabels[0].textContent = t.namaLabel;
+        idLabels[1].textContent = t.mapelDisplay;
+        idLabels[2].textContent = t.kelasDisplay;
+        idLabels[3].textContent = t.hariTanggal;
+        const kotakLabels = document.querySelectorAll(".kotak-nilai-label");
+        if (kotakLabels[0]) kotakLabels[0].textContent = t.nilaiLabel;
+        if (kotakLabels[1]) kotakLabels[1].textContent = t.parafLabel;
+        const bagianTitles = document.querySelectorAll(".bagian-title");
+        if (bagianTitles[0]) bagianTitles[0].textContent = t.pgTitle;
+        if (bagianTitles[1]) bagianTitles[1].textContent = t.isianTitle;
+        if (bagianTitles[2]) bagianTitles[2].textContent = t.essayTitle;
+        document.querySelector("#menu-bahasa > span:first-child").textContent =
+          t.langMenu;
+        document.getElementById("btn-kembali-hub").textContent = t.kembaliHub;
+        document
+          .getElementById("lang-id")
+          .classList.toggle("active", code === "id");
+        document
+          .getElementById("lang-en")
+          .classList.toggle("active", code === "en");
+        document.getElementById("menu-bahasa").classList.remove("open");
+        settingsDropdown.classList.remove("open");
+        settingsBtn.classList.remove("open");
+      }
+    </script>
+
+    <div
+      id="printModal"
+      style="
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        font-family: &quot;Poppins&quot;, sans-serif;
+      "
+    >
+      <div
+        style="
+          background: linear-gradient(135deg, #1a2535, #0f1923);
+          border: 1px solid #ef4444;
+          border-radius: 16px;
+          padding: 30px;
+          max-width: 450px;
+          width: 90%;
+          text-align: left;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+          transition: border-color 0.3s;
+        "
+      >
+        <div style="font-size: 36px; text-align: center; margin-bottom: 10px">
+          📋
+        </div>
+        <h3
+          id="printModalTitle"
+          style="
+            color: #ef4444;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
+          "
+        >
+          KONFIRMASI INSTRUMEN CETAK
+        </h3>
+
+        <p
+          id="printModalDesc"
+          style="
+            color: #94a3b8;
+            font-size: 11.5px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            text-align: center;
+          "
+        >
+          Mohon validasi kembali seluruh konfigurasi instrumen lembar jawaban
+          Anda demi menghindari pemborosan tinta dan kertas akibat kesalahan
+          cetak:
+        </p>
+
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #2a3a50;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 22px;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              gap: 10px;
+              color: #e2e8f0;
+              font-size: 12px;
+              line-height: 1.5;
+            "
+          >
+            <span
+              class="print-bullet"
+              style="
+                color: #ef4444;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 1;
+                transition: color 0.3s;
+              "
+              >•</span
+            >
+            <span id="lbl-check-logo">Apakah Logo Sekolah sudah sesuai?</span>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              gap: 10px;
+              color: #e2e8f0;
+              font-size: 12px;
+              line-height: 1.5;
+            "
+          >
+            <span
+              class="print-bullet"
+              style="
+                color: #ef4444;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 1;
+                transition: color 0.3s;
+              "
+              >•</span
+            >
+            <span id="lbl-check-kop"
+              >Apakah susunan teks Kop Sekolah benar?</span
+            >
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              gap: 10px;
+              color: #e2e8f0;
+              font-size: 12px;
+              line-height: 1.5;
+            "
+          >
+            <span
+              class="print-bullet"
+              style="
+                color: #ef4444;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 1;
+                transition: color 0.3s;
+              "
+              >•</span
+            >
+            <span id="lbl-check-kertas"
+              >Apakah pilihan ukuran kertas (A4/F4) tepat?</span
+            >
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              gap: 10px;
+              color: #e2e8f0;
+              font-size: 12px;
+              line-height: 1.5;
+            "
+          >
+            <span
+              class="print-bullet"
+              style="
+                color: #ef4444;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 1;
+                transition: color 0.3s;
+              "
+              >•</span
+            >
+            <span id="lbl-check-soal"
+              >Apakah kuantitas & penomoran soal sudah pas?</span
+            >
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px">
+          <button
+            id="btnPrintCancel"
+            onclick="closePrintModal()"
+            style="
+              flex: 1;
+              background: transparent;
+              border: 1px solid #2a3a50;
+              color: #64748b;
+              border-radius: 8px;
+              padding: 10px;
+              font-size: 12.5px;
+              font-weight: 600;
+              cursor: pointer;
+              font-family: &quot;Poppins&quot;, sans-serif;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.color = '#ef4444';
+              this.style.borderColor = '#ef4444';
+              this.style.boxShadow = '0 0 14px rgba(239, 68, 68, 0.4)';
+            "
+            onmouseout="
+              this.style.color = '#64748b';
+              this.style.borderColor = '#2a3a50';
+              this.style.boxShadow = 'none';
+            "
+          >
+            Batal
+          </button>
+          <button
+            id="btnConfirmPrint"
+            disabled
+            style="
+              flex: 1.6;
+              background: #ef4444;
+              border: none;
+              color: white;
+              border-radius: 8px;
+              padding: 10px;
+              font-size: 12.5px;
+              font-weight: 600;
+              cursor: not-allowed;
+              font-family: &quot;Poppins&quot;, sans-serif;
+              transition: all 0.3s;
+              box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+            "
+          >
+            Tunggu (5s)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let printTimer = null;
+      let activeLangCode = "id";
+
+      const originalSetLang = setLang;
+      setLang = function (code, event) {
+        activeLangCode = code;
+        if (typeof originalSetLang === "function") {
+          originalSetLang(code, event);
+        }
+        localizePrintModal(code);
+      };
+
+      const printTranslations = {
+        id: {
+          title: "KONFIRMASI INSTRUMEN CETAK",
+          desc: "Mohon validasi kembali seluruh konfigurasi instrumen lembar jawaban Anda demi menghindari pemborosan tinta dan kertas akibat kesalahan cetak:",
+          logo: "Apakah Logo Sekolah sudah sesuai?",
+          kop: "Apakah susunan teks Kop Sekolah benar?",
+          kertas: "Apakah pilihan ukuran kertas (A4/F4) tepat?",
+          soal: "Apakah kuantitas & penomoran soal sudah pas?",
+          cancel: "Batal",
+          wait: "Tunggu",
+          ready: "Cetak Sekarang",
+        },
+        en: {
+          title: "PRINT INSTRUMENT CONFIRMATION",
+          desc: "Please double-check all answer sheet configurations to avoid wasting ink and paper due to printing mistakes:",
+          logo: "Is the school logo correct?",
+          kop: "Is the school header text structured correctly?",
+          kertas: "Is the selected paper size (A4/F4) accurate?",
+          soal: "Are the question quantities & numbering setup right?",
+          cancel: "Cancel",
+          wait: "Wait",
+          ready: "Print Document Now",
+        },
+      };
+
+      function localizePrintModal(code) {
+        const pt = printTranslations[code] || printTranslations.id;
+        const tTitle = document.getElementById("printModalTitle");
+        const tDesc = document.getElementById("printModalDesc");
+        const tLogo = document.getElementById("lbl-check-logo");
+        const tKop = document.getElementById("lbl-check-kop");
+        const tKertas = document.getElementById("lbl-check-kertas");
+        const tSoal = document.getElementById("lbl-check-soal");
+        const tCancel = document.getElementById("btnPrintCancel");
+
+        if (tTitle) tTitle.textContent = pt.title;
+        if (tDesc) tDesc.textContent = pt.desc;
+        if (tLogo) tLogo.textContent = pt.logo;
+        if (tKop) tKop.textContent = pt.kop;
+        if (tKertas) tKertas.textContent = pt.kertas;
+        if (tSoal) tSoal.textContent = pt.soal;
+        if (tCancel) tCancel.textContent = pt.cancel;
+      }
+
+      function openPrintModal() {
+        const modal = document.getElementById("printModal");
+        const btn = document.getElementById("btnConfirmPrint");
+        const card = modal.querySelector("div");
+        const pt = printTranslations[activeLangCode] || printTranslations.id;
+        const bullets = card.querySelectorAll(".print-bullet");
+
+        modal.style.display = "flex";
+        btn.disabled = true;
+        btn.style.background = "#ef4444";
+        btn.style.color = "white";
+        btn.style.cursor = "not-allowed";
+        btn.style.boxShadow = "0 4px 15px rgba(239, 68, 68, 0.2)";
+        btn.onmouseover = null;
+        btn.onmouseout = null;
+        card.style.borderColor = "#ef4444";
+        document.getElementById("printModalTitle").style.color = "#ef4444";
+        bullets.forEach((b) => (b.style.color = "#ef4444"));
+
+        let timeLeft = 5;
+        btn.textContent = `${pt.wait} (${timeLeft}s)`;
+
+        clearInterval(printTimer);
+        printTimer = setInterval(() => {
+          timeLeft--;
+          if (timeLeft > 0) {
+            btn.textContent = `${pt.wait} (${timeLeft}s)`;
+          } else {
+            clearInterval(printTimer);
+            btn.disabled = false;
+            btn.textContent = pt.ready;
+            btn.style.background = "linear-gradient(135deg, #3b82f6, #2563eb)";
+            btn.style.cursor = "pointer";
+            btn.style.boxShadow = "0 4px 20px rgba(59, 130, 246, 0.4)";
+            card.style.borderColor = "#3b82f6";
+            document.getElementById("printModalTitle").style.color = "#3b82f6";
+            bullets.forEach((b) => (b.style.color = "#3b82f6"));
+
+            btn.onmouseover = () => {
+              btn.style.filter = "brightness(1.15)";
+              btn.style.boxShadow = "0 0 18px rgba(59, 130, 246, 0.6)";
+            };
+            btn.onmouseout = () => {
+              btn.style.filter = "none";
+              btn.style.boxShadow = "0 4px 20px rgba(59, 130, 246, 0.4)";
+            };
+
+            btn.onclick = () => {
+              modal.style.display = "none";
+              window.print();
+
+              // Hitung akumulasi sesi cetak menggunakan localStorage agar persisten
+              let ljaPrints =
+                parseInt(localStorage.getItem("lja_print_count") || "0") + 1;
+              if (ljaPrints >= 3) {
+                localStorage.setItem("lja_print_count", "0"); // Reset hitungan setelah pop up keluar
+                setTimeout(() => {
+                  openFeedbackModal();
+                }, 800);
+              } else {
+                localStorage.setItem("lja_print_count", ljaPrints);
+              }
+            };
+          }
+        }, 1000);
+      }
+
+      function closePrintModal() {
+        clearInterval(printTimer);
+        document.getElementById("printModal").style.display = "none";
+      }
+    </script>
+
+    <!-- Popup Iseng Feedback Universal (Ramah & Meyakinkan) -->
+    <div
+      id="feedbackModal"
+      style="
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        font-family: &quot;Poppins&quot;, sans-serif;
+        transition: opacity 0.4s ease;
+      "
+    >
+      <div
+        id="feedbackCard"
+        style="
+          background: linear-gradient(135deg, #1a2535, #0f1923);
+          border: 1px solid #3b82f6;
+          border-radius: 16px;
+          padding: 30px;
+          max-width: 360px;
+          width: 88%;
+          text-align: center;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+          position: absolute;
+          transition:
+            left 0.15s cubic-bezier(0.25, 0.8, 0.25, 1),
+            top 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
+          box-sizing: border-box;
+        "
+      >
+        <!-- Wadah Utama Form -->
+        <div id="feedbackFormArea" style="display: block">
+          <h3
+            id="feedbackTitle"
+            style="
+              color: #60a5fa;
+              font-size: 16px;
+              font-weight: 700;
+              margin-bottom: 10px;
+              letter-spacing: 0.5px;
+            "
+          >
+            Berikan Penilaian Anda 💡
+          </h3>
+          <p
+            id="feedbackDesc"
+            style="
+              color: #94a3b8;
+              font-size: 12px;
+              line-height: 1.6;
+              margin-bottom: 22px;
+            "
+          >
+            Apakah tools ini berjalan dengan lancar dan membantu Anda hari ini?
+          </p>
+          <div style="display: flex; justify-content: center; gap: 15px">
+            <button
+              id="btnFeedbackYes"
+              onclick="submitFeedbackYes()"
+              style="
+                width: 110px;
+                background: linear-gradient(135deg, #3b82f6, #2563eb);
+                border: none;
+                color: white;
+                border-radius: 8px;
+                padding: 10px;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+                transition: all 0.2s;
+              "
+              onmouseover="
+                this.style.filter = 'brightness(1.15)';
+                this.style.boxShadow = '0 0 14px rgba(59, 130, 246, 0.6)';
+              "
+              onmouseout="
+                this.style.filter = 'none';
+                this.style.boxShadow = '0 4px 15px rgba(59, 130, 246, 0.3)';
+              "
+            >
+              Ya
+            </button>
+            <button
+              id="btnFeedbackNo"
+              style="
+                width: 110px;
+                background: #ef4444;
+                border: none;
+                color: white;
+                border-radius: 8px;
+                padding: 10px;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+                transition: all 0.1s;
+                touch-action: manipulation;
+              "
+            >
+              Tidak
+            </button>
+          </div>
+        </div>
+
+        <!-- Wadah Sukses -->
+        <div id="feedbackSuccessArea" style="display: none">
+          <div
+            style="
+              font-size: 36px;
+              margin-bottom: 12px;
+              filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.3));
+            "
+          >
+            ✅
+          </div>
+          <h3
+            id="feedbackSuccessTitle"
+            style="
+              color: #10b981;
+              font-size: 15px;
+              font-weight: 700;
+              margin-bottom: 8px;
+              letter-spacing: 0.5px;
+            "
+          >
+            KONFIRMASI DITERIMA
+          </h3>
+          <p
+            id="feedbackSuccessDesc"
+            style="color: #e2e8f0; font-size: 11.5px; line-height: 1.5"
+          >
+            Terima kasih atas penilaian jujur Anda.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function openFeedbackModal() {
+        const modal = document.getElementById("feedbackModal");
+        const card = document.getElementById("feedbackCard");
+
+        document.getElementById("feedbackFormArea").style.display = "block";
+        document.getElementById("feedbackSuccessArea").style.display = "none";
+        modal.style.opacity = "1";
+        modal.style.display = "flex";
+
+        card.style.top = "50%";
+        card.style.left = "50%";
+        card.style.transform = "translate(-50%, -50%)";
+
+        const titleEl = document.getElementById("feedbackTitle");
+        const descEl = document.getElementById("feedbackDesc");
+        const btnYes = document.getElementById("btnFeedbackYes");
+        const btnNo = document.getElementById("btnFeedbackNo");
+
+        if (activeLangCode === "en") {
+          titleEl.textContent = "Give Your Rating 💡";
+          descEl.textContent = "Did this tool run smoothly and help you today?";
+          btnYes.textContent = "Yes";
+          btnNo.textContent = "No";
+        } else {
+          titleEl.textContent = "Berikan Penilaian Anda 💡";
+          descEl.textContent =
+            "Apakah tools ini berjalan dengan lancar dan membantu Anda hari ini?";
+          btnYes.textContent = "Ya";
+          btnNo.textContent = "Tidak";
+        }
+      }
+
+      function submitFeedbackYes() {
+        const modal = document.getElementById("feedbackModal");
+        const formArea = document.getElementById("feedbackFormArea");
+        const successArea = document.getElementById("feedbackSuccessArea");
+
+        const successTitle = document.getElementById("feedbackSuccessTitle");
+        const successDesc = document.getElementById("feedbackSuccessDesc");
+
+        if (activeLangCode === "en") {
+          successTitle.textContent = "CONFIRMATION RECORDED";
+          successDesc.textContent = "Thank you for your honest feedback.";
+        } else {
+          successTitle.textContent = "KONFIRMASI DITERIMA";
+          successDesc.textContent = "Terima kasih atas penilaian jujur Anda.";
+        }
+
+        formArea.style.display = "none";
+        successArea.style.display = "block";
+
+        card.style.top = "50%";
+        card.style.left = "50%";
+        card.style.transform = "translate(-50%, -50%)";
+
+        setTimeout(() => {
+          card.style.opacity = "0";
+          setTimeout(() => {
+            modal.style.display = "none";
+            card.style.opacity = "1";
+          }, 400);
+        }, 1500);
+      }
+
+      function moveFeedbackNo(e) {
+        if (e) e.preventDefault();
+        const card = document.getElementById("feedbackCard");
+        card.style.transform = "none";
+
+        const cardWidth = card.offsetWidth || 340;
+        const cardHeight = card.offsetHeight || 220;
+
+        const maxX = window.innerWidth - cardWidth - 16;
+        const maxY = window.innerHeight - cardHeight - 16;
+
+        const randomX = Math.max(
+          12,
+          Math.floor(Math.random() * Math.max(12, maxX)),
+        );
+        const randomY = Math.max(
+          12,
+          Math.floor(Math.random() * Math.max(12, maxY)),
+        );
+
+        card.style.left = randomX + "px";
+        card.style.top = randomY + "px";
+      }
+
+      const btnNoEl = document.getElementById("btnFeedbackNo");
+      if (btnNoEl) {
+        btnNoEl.addEventListener("mouseover", moveFeedbackNo);
+        btnNoEl.addEventListener("touchstart", moveFeedbackNo, {
+          passive: false,
+        });
+        btnNoEl.addEventListener("click", (e) => {
+          e.preventDefault();
+          moveFeedbackNo();
+        });
+        btnNoEl.addEventListener("mouseover", () => {
+          btnNoEl.style.boxShadow = "0 0 14px rgba(239, 68, 68, 0.6)";
+        });
+        btnNoEl.addEventListener("mouseout", () => {
+          btnNoEl.style.boxShadow = "0 4px 15px rgba(239, 68, 68, 0.3)";
+        });
+      }
+    </script>
   </body>
 </html>
